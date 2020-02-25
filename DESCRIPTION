@@ -1,0 +1,15 @@
+Package: dpeak
+Type: Package
+Title: dPeak (Deconvolution of Peaks in ChIP-seq Analysis)
+Version: 2.0.1
+Depends: R (>= 2.11.1), methods, graphics, Rcpp
+Imports: MASS, IRanges, BSgenome
+Suggests: parallel
+LinkingTo: Rcpp
+SystemRequirements: Perl
+Date: 2014-09-15
+Author: Dongjun Chung
+Maintainer: Dongjun Chung <chungdon@stat.wisc.edu>
+Description: This package provides functions for fitting dPeak, a statistical framework to deconvolve ChIP-seq peaks.
+License: GPL (>= 2)
+LazyLoad: yes

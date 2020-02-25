@@ -1,0 +1,11 @@
+useDynLib(dpeak)
+exportPattern("^[[:alpha:]]+")
+importFrom( Rcpp, evalCpp )
+
+import( methods, graphics, MASS, IRanges, BSgenome )
+
+export( dpeakRead, dpeakMotif, dpeakFit )
+
+export( show, plot, print, printEmpty )
+
+export( export )
