@@ -14,5 +14,5 @@ Description: This package provides functions for fitting dPeak, a statistical fr
 License: GPL (>= 2)
 LazyLoad: yes
 NeedsCompilation: yes
-biocViews: ChIPSeq, Sequencing, Transcription, Genetics, Bioinformatics
+biocViews: ChIPSeq, Genetics, Sequencing, Software, Transcription
 SystemRequirements: GNU make

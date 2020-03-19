@@ -16,6 +16,7 @@ printEmpty( object, ... )
         dPeak data obtained using the method \code{dpeakRead}. } 
     \item{...}{ Other parameters to be passed through to generic \code{printEmpty}.}
 }
+\value{Return the peak regions without any reads}
 \author{ Dongjun Chung }
 \seealso{
 \code{\link{dpeakRead}}, \code{\linkS4class{DpeakData}}.

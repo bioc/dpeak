@@ -29,6 +29,7 @@ where score is the relative binding strength multiplied by 1000.
 The feature of GFF file and the name of BED file are 
 the peak region that each binding event belongs to.
 }
+\value{Export deconvolution results to text files}
 \author{ Dongjun Chung }
 \seealso{
 \code{\link{dpeakFit}}, \code{\linkS4class{DpeakFit}}.
