@@ -34,12 +34,11 @@ the peak region that each binding event belongs to.
 \code{\link{dpeakFit}}, \code{\linkS4class{DpeakFit}}.
 }
 \examples{
-\dontrun{
+data(exampleData)
 fit <- dpeakFit( data )
 export( fit, type="txt", filename="result.txt" )
 export( fit, type="bed", filename="result.bed" )
 export( fit, type="gff", filename="result.gff" )
-}
 }
 \keyword{models}
 \keyword{methods}

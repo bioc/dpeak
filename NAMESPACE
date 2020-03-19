@@ -2,7 +2,7 @@ useDynLib(dpeak)
 exportPattern("^[[:alpha:]]+")
 importFrom( Rcpp, evalCpp )
 
-import( methods, graphics, MASS, IRanges, BSgenome )
+import( methods, graphics, MASS, IRanges )
 
 export( dpeakRead, dpeakMotif, dpeakFit )
 

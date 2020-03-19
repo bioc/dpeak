@@ -59,13 +59,10 @@ Construct \code{DpeakFit} class object.
 \code{\link{dpeakRead}}, \code{\linkS4class{DpeakFit}}.
 }
 \examples{
-\dontrun{
-fit <- dpeakFit( data, objectMotif=NULL, estDeltaSigma="separate", init="uniform" )
 
-library(BSgenome.Ecoli.NCBI.20080805)
-resultMotif <- dpeakMotif( peakfile="examplePeak.txt", refGenome=Ecoli )
-fit <- dpeakFit( data, objectMotif=resultMotif, estDeltaSigma="common", init="localmax" )
-}
+data(exampleData)
+exampleFit <- dpeakFit(exampleData, maxComp = 5, nCore = 8)
+
 }
 \keyword{models}
 \keyword{methods}

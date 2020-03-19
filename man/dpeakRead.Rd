@@ -65,26 +65,19 @@ Construct \code{DpeakData} class object.
 \code{\link{dpeakFit}}, \code{\linkS4class{DpeakData}}.
 }
 \examples{
-\dontrun{
+
 # PET data
 
-dataPET <- dpeakRead( peakfile="examplePeak.txt", readfile="examplePETRead.txt", 
-    fileFormat="eland_result", PET=TRUE )
-dataPET
-plot( dataPET, filename="exPETplot.pdf" )
-fitPET <- dpeakFit( dataPET )
+# dataPET <- dpeakRead( peakfile="examplePeak.txt", readfile="examplePETRead.txt", 
+#    fileFormat="eland_result", PET=TRUE )
 
 # SET data
 
-dataSET <- dpeakRead( peakfile="examplePeak.txt", readfile="exampleSETRead.txt", 
-    fileFormat="eland_result", PET=FALSE, fragLen=150 )
-dataSET
-plot( dataSET, filename="exSETplot_combined.pdf", strand=FALSE )
-plot( dataSET, filename="exSETplot_strand_1.pdf", 
-    strand=TRUE, extension=1, smoothing=TRUE )
-plot( dataSET, filename="exSETplot_strand_150.pdf", 
-    strand=TRUE, extension=150, smoothing=FALSE )
-fitSET <- dpeakFit( dataSET )}
+# dataSET <- dpeakRead( peakfile="examplePeak.txt", readfile="exampleSETRead.txt", 
+#    fileFormat="eland_result", PET=FALSE, fragLen=150 )
+
+data(exampleData)
+
 }
 \keyword{models}
 \keyword{methods}

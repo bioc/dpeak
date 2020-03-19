@@ -3,7 +3,7 @@ Type: Package
 Title: dPeak (Deconvolution of Peaks in ChIP-seq Analysis)
 Version: 0.99.0
 Depends: R (>= 4.0.0), methods, graphics, Rcpp
-Imports: MASS, IRanges, BSgenome
+Imports: MASS, IRanges
 Suggests: parallel
 LinkingTo: Rcpp
 SystemRequirements: Perl
@@ -14,4 +14,5 @@ Description: This package provides functions for fitting dPeak, a statistical fr
 License: GPL (>= 2)
 LazyLoad: yes
 NeedsCompilation: yes
-biocViews: ChIPseq, Sequencing, Transcription, Genetics, Bioinformatics
+biocViews: ChIPSeq, Sequencing, Transcription, Genetics, Bioinformatics
+SystemRequirements: GNU make

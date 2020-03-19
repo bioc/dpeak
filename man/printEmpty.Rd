@@ -21,11 +21,8 @@ printEmpty( object, ... )
 \code{\link{dpeakRead}}, \code{\linkS4class{DpeakData}}.
 }
 \examples{
-\dontrun{
-dataPET <- dpeakRead( peakfile="examplePeak.txt", readfile="examplePETRead.txt", 
-    fileFormat="eland_result", PET=TRUE )
-printEmpty( dataPET )
-}
+data(exampleData)
+printEmpty(exampleData)
 }
 \keyword{models}
 \keyword{methods}
