@@ -148,7 +148,7 @@ Height at each position indicates the number of 5' end of reads aligned to the p
 We can now fit a dPeak model using the imported data (\texttt{exampleData}) with the command:
 
 <<dpeakfit>>=
-exampleFit <- dpeakFit( exampleData, maxComp=5, nCore=8 )
+exampleFit <- dpeakFit( exampleData, maxComp=5)
 @
 
 `\texttt{dpeakFit}' fits models with at most `\texttt{maxComp}' binding events for each peak
