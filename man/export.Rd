@@ -36,7 +36,7 @@ the peak region that each binding event belongs to.
 }
 \examples{
 data(exampleData)
-fit <- dpeakFit( data )
+fit <- dpeakFit(exampleData)
 export( fit, type="txt", filename="result.txt" )
 export( fit, type="bed", filename="result.bed" )
 export( fit, type="gff", filename="result.gff" )
