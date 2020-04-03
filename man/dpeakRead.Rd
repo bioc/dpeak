@@ -8,7 +8,7 @@ Import and process peak list and aligned read files.
 }
 \usage{
 dpeakRead( peakfile=NULL, readfile=NULL, fileFormat="eland_result", 
-    PET=FALSE, fragLen=200, parallel=FALSE, nCore=8, tempDir=NULL, perl = "perl" )
+    PET=FALSE, fragLen=200, parallel=FALSE, nCore=1, tempDir=NULL, perl = "perl" )
 }
 \arguments{
   \item{peakfile}{File name of the peak list.}
