@@ -7,7 +7,7 @@ setMethod(
     definition=function( object, objectMotif=NULL, estDeltaSigma="common", init="localmax",
 		nTop=100, lbDelta=25, lbSigma=25,
         psize=21, maxComp=5, pConst=0.2,
-        nCore=8, verbose=FALSE, iterInit=50, iterMain=25, epsilon=1e-6 )
+        nCore=1, verbose=FALSE, iterInit=50, iterMain=25, epsilon=1e-6 )
     {
 		# use motif information for initialization?
 
@@ -203,7 +203,7 @@ setMethod(
                 .deconWrapper( fData=x, estDeltaSigma=estDeltaSigma, init=init,
 					deltaInit=deltaCommon, sigmaInit=sigmaCommon, lbDelta=lbDelta, lbSigma=lbSigma,
                     psize=psize, max_comp=maxComp, pConst=pConst,
-                     niter_init=iterInit, niter_gen=iterMain, 
+                     niter_init=iterInit, niter_gen=iterMain,
                     PET=PET, L_table=L_table, Fratio=Fratio, aveFragLen=aveFragLen,
                     stop_eps=epsilon, verbose=verbose )
                 } )
