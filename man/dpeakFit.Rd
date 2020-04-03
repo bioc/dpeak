@@ -12,8 +12,7 @@ dpeakFit( object, ... )
 \S4method{dpeakFit}{DpeakData}( object, 
 	objectMotif=NULL, estDeltaSigma="common", init="localmax", 
 	nTop=100, lbDelta = 25, lbSigma = 25,
-    psize=21, maxComp=5, pConst=0.2, nCore=1, verbose=FALSE, 
-    seed=12345, iterInit=50, iterMain=25, epsilon=1e-6 )
+    psize=21, maxComp=5, pConst=0.2, nCore=1, verbose=FALSE, iterInit=50, iterMain=25, epsilon=1e-6 )
 }
 \arguments{
     \item{object}{Object of class \code{DpeakData},
