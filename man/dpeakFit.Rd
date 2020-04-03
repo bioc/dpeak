@@ -61,7 +61,7 @@ Construct \code{DpeakFit} class object.
 \examples{
 
 data(exampleData)
-exampleFit <- dpeakFit(exampleData, maxComp = 5, nCore = 8)
+exampleFit <- dpeakFit(exampleData, maxComp = 5)
 
 }
 \keyword{models}
