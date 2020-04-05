@@ -37,6 +37,17 @@ pdftitle={dpeak Vignette}]
 %\VignettePackage{dpeak}
 \maketitle
 
+\tableofcontents
+
+\section{Installation}
+<<installation>>=
+if(!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("dpeak")
+@
+
+
+
 \section{Overview}
 
 This vignette provides an introduction to the `\texttt{dpeak}' package.

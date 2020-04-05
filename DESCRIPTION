@@ -1,7 +1,7 @@
 Package: dpeak
 Type: Package
 Title: dPeak (Deconvolution of Peaks in ChIP-seq Analysis)
-Version: 0.99.7
+Version: 0.99.8
 Depends: R (>= 4.0.0), methods, graphics, Rcpp
 Imports: MASS, IRanges
 Suggests: parallel
@@ -12,7 +12,8 @@ Author: Dongjun Chung
 Maintainer: Dongjun Chung <dongjun.chung@gmail.com>
 Description: dPeak is a statistical framework for the high resolution identification of protein-DNA interaction sites using PET and SET ChIP-Seq and ChIP-exo data. It provides computationally efficient and user friendly interface to process ChIP-seq and ChIP-exo data, implement exploratory analysis, fit dPeak model, and export list of predicted binding sites for downstream analysis.
 License: GPL (>= 2)
-LazyLoad: yes
+LazyData: FALSE
 NeedsCompilation: yes
 biocViews: ChIPSeq, Genetics, Sequencing, Software, Transcription
 SystemRequirements: GNU make
+BugReports: https://github.com/dongjunchung/dpeak/issues

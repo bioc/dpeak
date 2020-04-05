@@ -39,7 +39,6 @@ dpeakFit( object, ... )
     \item{nCore}{Number of CPUs to be used when parallel computing is utilized. }
     \item{verbose}{Use verbose mode?
         Possible values are either \code{TRUE} (use) or \code{FALSE} (do not use). }
-    \item{seed}{Random seed for initialization of parameters. }
     \item{iterInit}{Iteration number for initial estimation of binding sites. }
     \item{iterMain}{Iteration number for main estimation of binding sites. }
     \item{epsilon}{Criterion to stop iteration for binding site estimation. }

@@ -9,6 +9,8 @@ library(devtools)
 install_github("dongjunchung/dpeak")
 ```
 
+Note that GNU Make is a system requirement. For more information on installing GNU Make can be found here: https://www.gnu.org/software/make/. 
+
 References
 ==========
 
