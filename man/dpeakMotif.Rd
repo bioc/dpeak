@@ -37,7 +37,7 @@ Construct \code{DpeakMotif} class object.
 \examples{
 \dontrun{
 library(BSgenome.Ecoli.NCBI.20080805)
-resultMotif <- dpeakMotif( peakfile="vignettes/examplePeak.txt", refGenome=Ecoli )
+resultMotif <- dpeakMotif( peakfile="examplePeak.txt", refGenome=Ecoli )
 }}
 \keyword{models}
 \keyword{methods}

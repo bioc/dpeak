@@ -14,7 +14,7 @@ Objects can be created by calls of the form \code{new("DpeakMotif", ...)}.
 }
 \section{Slots}{
   \describe{
-    \item{\code{motif}:}{Object of class \code{"character"}, 
+    \item{\code{motif}:}{Object of class \code{"character"},
         representing a vector of motifs. }
     \item{\code{locMotif}:}{Object of class \code{"list"},
         representing list of locations of motifs in candidate regions. }
@@ -38,7 +38,8 @@ Objects can be created by calls of the form \code{new("DpeakMotif", ...)}.
 \code{\link{dpeakMotif}}, \code{\link{dpeakFit}}.
 }
 \examples{
+\dontrun{
 library(BSgenome.Ecoli.NCBI.20080805)
 resultMotif <- dpeakMotif( peakfile="vignettes/examplePeak.txt", refGenome=Ecoli )
-}
+}}
 \keyword{classes}

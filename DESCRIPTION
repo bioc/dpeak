@@ -1,10 +1,10 @@
 Package: dpeak
 Type: Package
 Title: dPeak (Deconvolution of Peaks in ChIP-seq Analysis)
-Version: 0.99.18
+Version: 0.99.19
 Depends: R (>= 4.0.0), methods, stats, utils, graphics, Rcpp
 Imports: MASS, IRanges, BSgenome, grDevices
-Suggests: parallel
+Suggests: parallel, BSgenome.Ecoli.NCBI.20080805
 LinkingTo: Rcpp
 SystemRequirements: Perl
 Date: 2020-02-25
