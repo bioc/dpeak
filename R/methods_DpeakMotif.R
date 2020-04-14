@@ -1,5 +1,17 @@
 
-# generic methods for "DpeakData" class
+# generic methods for "DpeakMotif" class
+
+setMethod(
+  f = "get_motif",
+  signature = "DpeakMotif",
+  definition = function(x) x@motif
+)
+
+setMethod(
+  f = "get_locMotif",
+  signature = "DpeakMotif",
+  definition = function(x) x@locMotif
+)
 
 setMethod(
     f="show",
@@ -7,8 +19,8 @@ setMethod(
     definition=function( object ) {
       # extract objects
 
-      motifIden <- object@motif
-      locMotif <- object@locMotif
+      motifIden <- get_motif(object)
+      locMotif <- get_locMotif(object)
 
       if ( all(is.na(unlist(locMotif))) ) {
       	# if no peak includes a motif

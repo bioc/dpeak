@@ -4,18 +4,18 @@
 setClass( Class="DpeakData",
     representation=representation(
         fragSet="list",
-        
+
         PET="logical",
         fragLenTable="table",
         Fratio="numeric",
         aveFragLen="numeric",
-        
+
         stackedFragment="list",
-        
+
         peakChr="character",
         peakStart="numeric",
         peakEnd="numeric",
-        
+
         emptyList="character"
     )
 )
@@ -26,7 +26,7 @@ setClass( Class="DpeakMotif",
     representation=representation(
         motif="character",
         locMotif="list",
-        
+
         peakChr="character",
         peakStart="numeric",
         peakEnd="numeric"
@@ -38,7 +38,7 @@ setClass( Class="DpeakMotif",
 setClass( Class="DpeakFit",
     representation=representation(
         fits="list",
-        
+
         optFit="list",
         optMu="list",
         optPi="list",
@@ -48,28 +48,28 @@ setClass( Class="DpeakFit",
         optSigma="list",
         bicVec="list",
         aicVec="list",
-        
+
         fragSet="list",
         PET="logical",
         fragLenTable="table",
         Fratio="numeric",
         aveFragLen="numeric",
-        
+
         stackedFragment="list",
-        
+
         peakChr="character",
         peakStart="numeric",
         peakEnd="numeric",
-        
+
         estDeltaSigma="character",
-		nTop="numeric",
+		    nTop="numeric",
         lbDelta="numeric",
         lbSigma="numeric",
         psize="numeric",
-        maxComp="numeric", 
-        pConst="numeric", 
-        iterInit="numeric", 
-        iterMain="numeric", 
+        maxComp="numeric",
+        pConst="numeric",
+        iterInit="numeric",
+        iterMain="numeric",
         epsilon="numeric"
     )
 )

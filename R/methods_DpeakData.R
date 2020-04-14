@@ -2,20 +2,80 @@
 # generic methods for "DpeakData" class
 
 setMethod(
+  f = "get_fragSet",
+  signature = "DpeakData",
+  definition = function(x) x@fragSet
+)
+
+setMethod(
+  f = "get_PET",
+  signature = "DpeakData",
+  definition = function(x) x@PET
+)
+
+setMethod(
+  f = "get_fragLenTable",
+  signature = "DpeakData",
+  definition = function(x) x@fragLenTable
+)
+
+setMethod(
+  f = "get_Fratio",
+  signature = "DpeakData",
+  definition = function(x) x@Fratio
+)
+
+setMethod(
+  f = "get_aveFragLen",
+  signature = "DpeakData",
+  definition = function(x) x@aveFragLen
+)
+
+setMethod(
+  f = "get_stackedFragment",
+  signature = "DpeakData",
+  definition = function(x) x@stackedFragment
+)
+
+setMethod(
+  f = "get_peakChr",
+  signature = "DpeakData",
+  definition = function(x) x@peakChr
+)
+
+setMethod(
+  f = "get_peakStart",
+  signature = "DpeakData",
+  definition = function(x) x@peakStart
+)
+
+setMethod(
+  f = "get_peakEnd",
+  signature = "DpeakData",
+  definition = function(x) x@peakEnd
+)
+
+setMethod(
+  f = "get_emptyList",
+  signature = "DpeakData",
+  definition = function(x) x@emptyList
+)
+
+setMethod(
     f="show",
     signature="DpeakData",
     definition=function( object ) {
         # extract objects
 
-        peakChr <- object@peakChr
+        peakChr <- get_peakChr(object)
         chrList <- unique(peakChr)
         #fragSet <- object@fragSet
-        PET <- object@PET
-        aveFragLen <- object@aveFragLen
+        PET <- get_PET(object)
+        aveFragLen <- get_aveFragLen(object)
 
         # summary
 
-        nFrag <- unlist( lapply( object@fragSet,
+        nFrag <- unlist( lapply( get_fragSet(object),
             function(x) ifelse( !is.null(x), nrow(x), 0 )
          ) )
         sumRead <- sum( nFrag )
@@ -50,10 +110,10 @@ setMethod(
     f="printEmpty",
     signature="DpeakData",
     definition=function( object, ... ) {
-        if ( object@emptyList[1] == "" ) {
+        if ( get_emptyList(object)[1] == "" ) {
             message( "Every peak region has at least one read." )
         } else {
-            out <- apply( as.matrix(object@emptyList), 1,
+            out <- apply( as.matrix(get_emptyList(object)), 1,
                 function(x) {
                     splitOrg <- strsplit( x, "_" )[[1]]
 
@@ -84,7 +144,7 @@ setMethod(
     definition=function( x, y, filename=NULL, strand=FALSE, extension=1, smoothing=FALSE, ... ) {
         # extract estimates
 
-        PET <- x@PET
+        PET <- get_PET(x)
 
         # error treatment
 
@@ -96,13 +156,15 @@ setMethod(
 
         pdf( filename )
 
-        for ( i in seq_len(length(x@stackedFragment)) ) {
+        for ( i in seq_len(length(get_stackedFragment(x)) )) {
 
-            plot_title <- paste(x@peakChr[i],": ",x@peakStart[i],"-",x@peakEnd[i],sep="")
+            plot_title <- paste(get_peakChr(x)[i],": ",
+                                get_peakStart(x)[i],"-",
+                                get_peakEnd(x)[i],sep="")
 
             # flag if there are no reads in the peak region
 
-            if ( is.na(x@fragSet[[i]][1,1]) ) {
+            if ( is.na(get_fragSet(x)[[i]][1,1]) ) {
 
                 plot( 0, 0, type="n", xlab="", ylab="", axes=FALSE,
                     main=plot_title, xlim=c(-5,5), ylim=c(-5,5) )
@@ -114,13 +176,13 @@ setMethod(
             # plot
 
             xlim <- rep( NA, 2 )
-            xlim[1] <- min( x@peakStart[i], x@stackedFragment[[i]][,1] )
-            xlim[2] <- max( x@peakEnd[i], x@stackedFragment[[i]][,1] )
+            xlim[1] <- min( get_peakStart(x)[i], get_stackedFragment(x)[[i]][,1] )
+            xlim[2] <- max( get_peakEnd(x)[i], get_stackedFragment(x)[[i]][,1] )
 
             if ( strand==TRUE ) {
 
-                .plotStrandData( stackedFragment=x@stackedFragment[[i]],
-                    fragSet=x@fragSet[[i]], plot_title=plot_title, xlim=xlim,
+                .plotStrandData( stackedFragment=get_stackedFragment(x)[[i]],
+                    fragSet=get_fragSet(x)[[i]], plot_title=plot_title, xlim=xlim,
                     PET=PET, extension=extension, smoothing=smoothing )
 
                 if ( extension == 1 ) {
@@ -135,15 +197,16 @@ setMethod(
             } else {
                 # combined
 
-                plot( x@stackedFragment[[i]][,1], x@stackedFragment[[i]][,2], type="l",
+                plot( get_stackedFragment(x)[[i]][,1],
+                      get_stackedFragment(x)[[i]][,2], type="l",
                     xlab="Genomic coordinates", ylab="Frequency",
                     main=plot_title,
-                    xlim=xlim, ylim=c(0,max(x@stackedFragment[[i]][,2])*1.2) )
+                    xlim=xlim, ylim=c(0,max(get_stackedFragment(x)[[i]][,2])*1.2) )
 
                 legend( "topright", lty=1, col="black", "Stacked fragments" )
             }
-            abline( v=x@peakStart[i], col="red", lty=2 )
-            abline( v=x@peakEnd[i], col="red", lty=2 )
+            abline( v=get_peakStart(x)[i], col="red", lty=2 )
+            abline( v=get_peakEnd(x)[i], col="red", lty=2 )
         }
 
         dev.off()
