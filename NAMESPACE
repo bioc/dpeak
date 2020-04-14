@@ -1,5 +1,4 @@
 useDynLib(dpeak)
-exportPattern("^[[:alpha:]]+")
 importFrom( Rcpp, evalCpp )
 
 import( methods, graphics, MASS, IRanges )
