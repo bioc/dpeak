@@ -4,7 +4,7 @@
     extension=1, smoothing=TRUE, nCore=8 ) {
 
     # extract estimates
-    
+
     maxComp <- object@maxComp
     #bgComp <- object@bgComp
     peakStart <- object@peakStart
@@ -18,7 +18,7 @@
     # generate list to generate fragments
 
     optList <- vector( "list", length(object@optMu) )
-    for ( i in 1:length(object@optMu) ) {
+    for ( i in seq_len(length(object@optMu)) ) {
         # error treatment: skip peaks with no fragments
 
         if ( is.na(object@fragSet[[i]][1,1]) ) {
@@ -83,7 +83,7 @@
 
     message( "Info: Generating GOF plots..." )
 
-    for ( i in 1:length(object@stackedFragment) ) {
+    for ( i in seq_len(length(object@stackedFragment)) ) {
 
         plot_title <- paste(object@peakChr[i],": ",
             object@peakStart[i],"-",object@peakEnd[i],sep="")

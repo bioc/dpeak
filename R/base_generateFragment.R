@@ -27,7 +27,7 @@
 
     # generate signal fragments
 
-    simG <- rep( 1:length(mu), ceiling(pi*nsimul) )
+    simG <- rep( seq_len(length(mu)), ceiling(pi*nsimul) )
     simS <- simE <- rep( NA, length(simG) )
 
     if ( PET == TRUE ) {
@@ -45,7 +45,7 @@
 
     gTable <- table( simG )
 
-    for ( g in 1:nGroup ) {
+    for ( g in seq_len(nGroup) ) {
         mu_g <- mu[g]
         #n_g <- length(which( simG == g ))
         n_g <- as.numeric(gTable)[ names(gTable) == as.character(g) ]
@@ -61,8 +61,8 @@
             s <- pmax( s, minS )
             e <- pmin( e, maxS )
 
-            simS[ curLoc:(curLoc+n_g-1) ] <- s
-            simE[ curLoc:(curLoc+n_g-1) ] <- e
+            simS[ seq(from = curLoc, to = (curLoc+n_g-1)) ] <- s
+            simE[ seq(from = curLoc, to = (curLoc+n_g-1)) ] <- e
         } else {
             # SET
 
@@ -82,12 +82,12 @@
             s <- pmax( s, minS )
             e <- pmin( e, maxS )
 
-            simS[ curLoc:(curLoc+n_g-1) ] <- s
-            simE[ curLoc:(curLoc+n_g-1) ] <- e
-            simD[ curLoc:(curLoc+n_g-1) ] <- c( rep("F",nF), rep("R",nR) )
+            simS[ seq(from = curLoc, to = (curLoc+n_g-1)) ] <- s
+            simE[ seq(from = curLoc, to = (curLoc+n_g-1)) ] <- e
+            simD[ seq(from = curLoc, to = (curLoc+n_g-1)) ] <- c( rep("F",nF), rep("R",nR) )
         }
 
-        groupVec[ curLoc:(curLoc+n_g-1) ] <- rep(g,n_g)
+        groupVec[ seq(from = curLoc, to = (curLoc+n_g-1)) ] <- rep(g,n_g)
         curLoc <- curLoc + n_g
     }
 

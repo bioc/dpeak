@@ -3,7 +3,7 @@
 .deconWrapper <- function( fData, estDeltaSigma="common", init="localmax",
 	deltaInit=NA, sigmaInit=NA, lbDelta=c(25,25), lbSigma=c(25,25),
     psize=21, max_comp=5, pConst=0.2,
-    niter_init=25, niter_gen=25, 
+    niter_init=25, niter_gen=25,
     PET, L_table=NA, Fratio=0.5, aveFragLen=NA, stop_eps=1e-6, verbose=FALSE ) {
 
     frag <- fData$frag
@@ -67,7 +67,7 @@
 
         BIC_vec <- AIC_vec <- rep( NA, max_comp )
 
-        for ( n_comp in 1:max_comp ) {
+        for ( n_comp in seq_len(max_comp) ) {
             # initialization: motif -> signal -> uniform
 
 			if ( !is.na(locmotif[1]) ) {
@@ -77,7 +77,7 @@
 				locmotif_ordered <- locmotif[ order( seqsignal, decreasing=TRUE ) ]
 
 				if ( length(locmotif) >= n_comp ) {
-					mu_init <- locmotif_ordered[ 1:n_comp ]
+					mu_init <- locmotif_ordered[ seq_len(n_comp) ]
 				} else {
 					# use other approaches if we don't have enough points
 
@@ -87,7 +87,7 @@
 						# identify local max
 
 						initindex <- rep( 0, nrow(signal) )
-						initindex[ c( 1:nrow(signal) ) %% psize == 0 ] <- 1
+						initindex[ c( seq_len(nrow(signal)) ) %% psize == 0 ] <- 1
 						initindex <- cumsum(initindex)
 						signal_list <- split( as.data.frame(signal), initindex )
 						lmaxvec <- t(sapply( signal_list, function(x) unlist(x[ which.max(x[,2]), ]) ))
@@ -96,13 +96,13 @@
 						# initialize binding events with local max
 
 						if ( length(lmax_ordered) >= ( n_comp - length(locmotif) ) ) {
-							mu_init_plus <- lmax_ordered[ 1:( n_comp - length(locmotif) ) ]
+							mu_init_plus <- lmax_ordered[ seq_len(n_comp - length(locmotif)) ) ]
 						} else {
 							# use uniformly distribute binding events, if we don't have enough points
 
 							mu_unif <- seq( min(midp), max(midp), length=( ( n_comp - length(locmotif) - length(lmax_ordered) ) + 2 ) )
 							mu_unif <- mu_unif[ -c(1,length(mu_unif)) ]
-							mu_init_plus <- c( lmax_ordered, mu_unif[ 1:( n_comp - length(locmotif) - length(lmax_ordered) ) ] )
+							mu_init_plus <- c( lmax_ordered, mu_unif[ seq_len( n_comp - length(locmotif) - length(lmax_ordered)) ] )
 						}
 
 						mu_init <- c( locmotif_ordered, mu_init_plus )
@@ -125,7 +125,7 @@
 					# identify local max
 
 					initindex <- rep( 0, nrow(signal) )
-					initindex[ c( 1:nrow(signal) ) %% psize == 0 ] <- 1
+					initindex[ c( seq_len(nrow(signal)) ) %% psize == 0 ] <- 1
 					initindex <- cumsum(initindex)
 					signal_list <- split( as.data.frame(signal), initindex )
 					lmaxvec <- t(sapply( signal_list, function(x) unlist(x[ which.max(x[,2]), ]) ))
@@ -134,13 +134,13 @@
 					# initialize binding events with local max
 
 					if ( length(lmax_ordered) >= n_comp ) {
-						mu_init <- lmax_ordered[ 1:n_comp ]
+						mu_init <- lmax_ordered[ seq_len(n_comp) ]
 					} else {
 						# use uniformly distribute binding events, if we don't have enough points
 
 						mu_unif <- seq( min(midp), max(midp), length=( ( n_comp - length(lmax_ordered) ) + 2 ) )
 						mu_unif <- mu_unif[ -c(1,length(mu_unif)) ]
-						mu_init <- c( lmax_ordered, mu_unif[ 1:( n_comp - length(lmax_ordered) ) ] )
+						mu_init <- c( lmax_ordered, mu_unif[ seq_len(n_comp - length(lmax_ordered)) ] )
 					}
 				} else if ( init == "uniform" ) {
 					# uniformly distribute binding events

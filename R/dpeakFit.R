@@ -54,7 +54,7 @@ setMethod(
 	        lbDelta <- rep( lbDelta, 2 )
         } else if ( length(lbDelta) > 2 ) {
 	        message( "Info: Length of 'lbDelta' can be at most 2. Only the first two numbers are used." )
-	        lbDelta <- lbDelta[1:2]
+	        lbDelta <- lbDelta[c(1,2)]
         }
 
         if ( any( lbDelta < 5 ) ) {
@@ -68,7 +68,7 @@ setMethod(
 	        lbSigma <- rep( lbSigma, 2 )
         } else if ( length(lbSigma) > 2 ) {
 	        message( "Info: Length of 'lbSigma' can be at most 2. Only the first two numbers are used." )
-	        lbSigma <- lbSigma[1:2]
+	        lbSigma <- lbSigma[c(1,2)]
         }
 
         if ( any( lbSigma < 5 ) ) {
@@ -100,7 +100,7 @@ setMethod(
 
 			dataObj <- vector( "list", nTopFinal )
 			selvec <- which( nread >= nreadCutoff )
-			for ( i in 1:length(selvec) ) {
+			for ( i in seq_len(length(selvec)) ) {
 				isel <- selvec[i]
 
 				dataObj[[i]] <- list()
@@ -146,7 +146,7 @@ setMethod(
 
 			deltaCommon <- sigmaCommon <- ntotal <- 0
 
-			for ( itop in 1:nTopFinal ) {
+			for ( itop in seq_len(nTopFinal) ) {
 				ni <- nrow(dataObj[[itop]]$frag)
 
 				deltaCommon <- deltaCommon + fit_top[[itop]]$optDelta * ni
@@ -169,7 +169,7 @@ setMethod(
         # construct object for model fitting
 
         dataObj <- vector( "list", length(object@fragSet) )
-        for ( i in 1:length(object@fragSet) ) {
+        for ( i in seq_len(length(object@fragSet)) ) {
             dataObj[[i]] <- list()
             dataObj[[i]]$frag <- object@fragSet[[i]]
             dataObj[[i]]$peak <- c( object@peakStart[i], object@peakEnd[i] )
@@ -219,7 +219,7 @@ setMethod(
             optGamma <- optDelta <- optSigma <- bicVec <- aicVec <-
             vector( "list", length(object@fragSet) )
 
-        for ( i in 1:length(object@fragSet) ) {
+        for ( i in seq_len(length(object@fragSet)) ) {
             fits[[i]] <- fit_all[[i]]$fits
             optFit[[i]] <- fit_all[[i]]$optFit
             optMu[[i]] <- fit_all[[i]]$optMu

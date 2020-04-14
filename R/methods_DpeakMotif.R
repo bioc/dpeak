@@ -4,20 +4,20 @@
 setMethod(
     f="show",
     signature="DpeakMotif",
-    definition=function( object ) {    
+    definition=function( object ) {
       # extract objects
-        
+
       motifIden <- object@motif
       locMotif <- object@locMotif
-    	
+
       if ( all(is.na(unlist(locMotif))) ) {
       	# if no peak includes a motif
-      	
+
       	cat( "------------------------------------------------------------\n" )
       	cat( "Info: Preprocessing summary\n" )
       	cat( "------------------------------------------------------------\n" )
       	cat( "Identified motif:\n", sep="" )
-      	for ( i in 1:length(motifIden) ) {
+      	for ( i in seq_len(length(motifIden)) ) {
       		cat( "\t",motifIden[i],"\n", sep="" )
       	}
       	cat( "Note: No peak contains detected motifs.\n")
@@ -25,21 +25,21 @@ setMethod(
       } else {
 		    # info about preprocessing
 		    # - identified motif, # detected motifs
-      	
+
       	listMotifVec <- list()
       	k <- 1
-      	for ( i in 1:length(locMotif) ) {
+      	for ( i in seq_len(length(locMotif)) ) {
       		if ( !is.na(locMotif[[i]][1]) ) {
       			listMotifVec[[k]] <- locMotif[[i]]
       			k <- k + 1
       		}
       	}
-		    
+
 		    cat( "------------------------------------------------------------\n" )
 		    cat( "Info: Preprocessing summary\n" )
 		    cat( "------------------------------------------------------------\n" )
 		    cat( "Identified motif:\n", sep="" )
-		    for ( i in 1:length(motifIden) ) {
+		    for ( i in seq_len(length(motifIden)) ) {
 		    	cat( "\t",motifIden[i],"\n", sep="" )
 		    }
 		    cat( "Number of peaks containing detected motifs: ",length(listMotifVec),"\n", sep="" )

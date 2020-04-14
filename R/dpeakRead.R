@@ -48,7 +48,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     # match chromosomes between peak list and reads
 
-    peakByChr <- split( peakSet[ , 2:3, drop=FALSE ], peakSet[,1] )
+    peakByChr <- split( peakSet[ , c(2,3), drop=FALSE ], peakSet[,1] )
     peakChr <- names(peakByChr)
 
     chrCommon <- Reduce( intersect, list( peakChr, readChr ) )
@@ -85,10 +85,10 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         nF <- nAll <- rep( NA, length(chrCommon) )
     }
 
-    for ( chr in 1:length(chrCommon) ) {
+    for ( chr in seq_len(length(chrCommon)) ) {
         nPeakCur <- length( out[[chr]]$nameVecCur )
 
-        for ( j in 1:nPeakCur ) {
+        for ( j in seq_len(nPeakCur) ) {
             if ( !is.na(out[[chr]]$fragSetCur[[j]][1,1]) ) {
                 fragSet[[cur]] <- out[[chr]]$fragSetCur[[j]]
             } else {
@@ -112,7 +112,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     if ( PET == TRUE ) {
         fragLen <- c()
-        for ( chr in 1:length(chrCommon) ) {
+        for ( chr in seq_len(length(chrCommon)) ) {
             fragLen <- c( fragLen, out[[chr]]$fragLenCur )
         }
     }
@@ -242,7 +242,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     fragSetCur <- vector( "list", length(existInd) )
     cur <- 1
-    for ( j in 1:length(existInd) ) {
+    for ( j in seq_len(length(existInd)) ) {
         if ( existInd[j] == 1 ) {
             fragSetCur[[cur]] <-
                 readCur[ matchList[[ as.character(j) ]], -1, drop=FALSE ]
