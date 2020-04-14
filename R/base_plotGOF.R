@@ -54,10 +54,10 @@
     message( "Info: Generating simulated fragments from the fitted model..." )
 
     if ( is.element( "parallel", installed.packages()[,1] ) ) {
-        # if "parallel" package exists, utilize parallel computing with "mclapply"
-        library(parallel)
+        # if "parallel" package exists, utilize parallel computing with "parallel::mclapply"
+        # library(parallel)
 
-        simList <- mclapply( optList, function(x) {
+        simList <- parallel::mclapply( optList, function(x) {
             simFrag <- .generateFragment( object=x,
                 PET=PET, Lvalue=Lvalue, Lprob=Lprob,
                 Fratio=Fratio, aveFragLen=aveFragLen )

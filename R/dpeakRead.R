@@ -60,7 +60,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     message( "Info: Processing and combining peak list and reads..." )
 
     if ( parallel == TRUE ) {
-        out <- mclapply( chrCommon,
+        out <- parallel::mclapply( chrCommon,
             function(x) .matchPeakRead( chr=x, peakCur=peakByChr[[x]],
                 outfileName=paste(tempfileName[1],"_",x,sep=""),
                 nRow=summaryInfo[ summaryInfo[,1]==x, 2 ], PET=PET ),
@@ -136,7 +136,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     # stack fragment (projection to coordinates)
 
     if ( parallel == TRUE ) {
-        stackedFragment <- mclapply( fragSet, .stackFragment, mc.cores = nCore )
+        stackedFragment <- parallel::mclapply( fragSet, .stackFragment, mc.cores = nCore )
     } else {
         stackedFragment <- lapply( fragSet, .stackFragment )
     }
