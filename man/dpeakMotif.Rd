@@ -35,12 +35,8 @@ Construct \code{DpeakMotif} class object.
 \code{\link{dpeakFit}}, \code{\linkS4class{DpeakMotif}}.
 }
 \examples{
-\dontrun{
 library(BSgenome.Ecoli.NCBI.20080805)
-resultMotif <- dpeakMotif( peakfile="examplePeak.txt", refGenome=Ecoli )
-resultMotif
-fitPET <- dpeakFit( dataPET, resultMotif )
-}
+resultMotif <- dpeakMotif( peakfile="vignettes/examplePeak.txt", refGenome=Ecoli )
 }
 \keyword{models}
 \keyword{methods}

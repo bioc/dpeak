@@ -38,12 +38,7 @@ Objects can be created by calls of the form \code{new("DpeakMotif", ...)}.
 \code{\link{dpeakMotif}}, \code{\link{dpeakFit}}.
 }
 \examples{
-showClass("DpeakMotif")
-\dontrun{
 library(BSgenome.Ecoli.NCBI.20080805)
-resultMotif <- dpeakMotif( peakfile="examplePeak.txt", refGenome=Ecoli )
-resultMotif
-fitPET <- dpeakFit( dataPET, resultMotif )
-}
+resultMotif <- dpeakMotif( peakfile="vignettes/examplePeak.txt", refGenome=Ecoli )
 }
 \keyword{classes}

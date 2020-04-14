@@ -60,26 +60,8 @@ Objects can be created by calls of the form \code{new("DpeakData", ...)}.
 }
 \examples{
 showClass("DpeakData")
-\dontrun{
-# PET data
-
-dataPET <- dpeakRead( peakfile="examplePeak.txt", readfile="examplePETRead.txt", 
-    fileFormat="eland_result", PET=TRUE )
-dataPET
-plot( dataPET, filename="exPETplot.pdf" )
-fitPET <- dpeakFit( dataPET )
-
-# SET data
-
-dataSET <- dpeakRead( peakfile="examplePeak.txt", readfile="exampleSETRead.txt", 
-    fileFormat="eland_result", PET=FALSE, fragLen=150 )
-dataSET
-plot( dataSET, filename="exSETplot_combined.pdf", strand=FALSE )
-plot( dataSET, filename="exSETplot_strand_1.pdf", 
-    strand=TRUE, extension=1, smoothing=TRUE )
-plot( dataSET, filename="exSETplot_strand_150.pdf", 
-    strand=TRUE, extension=150, smoothing=FALSE )
-fitSET <- dpeakFit( dataSET )
-}
+\examples{
+data(exampleData)
+exampleData
 }
 \keyword{classes}

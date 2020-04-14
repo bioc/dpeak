@@ -10,9 +10,7 @@
   \code{DpeakData} class object containing aligned reads for a peak.
 }
 \examples{
-\dontrun{
 data(exampleData)
 exampleData
-}
 }
 \keyword{datasets}

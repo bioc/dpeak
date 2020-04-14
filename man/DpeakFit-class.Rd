@@ -106,26 +106,9 @@ Objects can be created by calls of the form \code{new("DpeakFit", ...)}.
 \code{\link{dpeakFit}}, \code{\link{export}}.
 }
 \examples{
-showClass("DpeakFit")
-\dontrun{
-# PET data
 
-fitPET <- dpeakFit( dataPET )
-fitPET
-plot( fitPET, filename="exPETResult.pdf", plotType="fit" )
-plot( fitPET, filename="exPETGOF.pdf", plotType="GOF" )
+data(exampleData)
+exampleFit <- dpeakFit(exampleData, maxComp = 5)
 
-# SET data
-
-fitSET <- dpeakFit( dataSET )
-fitSET
-plot( fitSET, filename="exSETResult_combined.pdf", 
-    plotType="fit", strand=FALSE )
-plot( fitSET, filename="exSETResult_strand_1.pdf", 
-    plotType="fit", strand=TRUE, extension=1, smoothing=TRUE )
-plot( fitSET, filename="exSETResult_strand_150.pdf", 
-    plotType="fit", strand=TRUE, extension=150, smoothing=FALSE )
-plot( fitSET, filename="exSETGOF.pdf", plotType="GOF" )
-plot( fitSET, filename="exSETBIC.pdf", plotType="BIC" )}
 }
 \keyword{classes}

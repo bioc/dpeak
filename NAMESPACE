@@ -2,6 +2,11 @@ useDynLib(dpeak)
 importFrom( Rcpp, evalCpp )
 
 import( methods, graphics, MASS, IRanges )
+importFrom("parallel", "mclapply")
+importFrom("BSgenome","getSeq")
+importFrom("grDevices", "dev.off", "pdf")
+importFrom("stats", "dnorm", "rnorm", "runif", "smooth.spline")
+importFrom("utils", "installed.packages", "read.table")
 
 export( dpeakRead, dpeakMotif, dpeakFit )
 
