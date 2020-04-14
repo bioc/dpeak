@@ -118,10 +118,10 @@ setMethod(
 			# deconvolve top candidate regions (using parallel computing, if parallel exists)
 
 			if ( is.element( "parallel", installed.packages()[,1] ) ) {
-				# if "parallel" package exists, utilize parallel computing with "mclapply"
-				library(parallel)
+				# if "parallel" package exists, utilize parallel computing with "parallel::mclapply"
+				# library(parallel)
 
-				fit_top <- mclapply( dataObj, function(x) {
+				fit_top <- parallel::mclapply( dataObj, function(x) {
 					.deconWrapper( fData=x, estDeltaSigma="separate", init=init,
 						deltaInit=NA, sigmaInit=NA, lbDelta=lbDelta, lbSigma=lbSigma,
 						psize=psize, max_comp=maxComp, pConst=pConst,
@@ -185,10 +185,10 @@ setMethod(
         # deconvolve all peaks (using parallel computing, if parallel exists)
 
         if ( is.element( "parallel", installed.packages()[,1] ) ) {
-            # if "parallel" package exists, utilize parallel computing with "mclapply"
-            library(parallel)
+            # if "parallel" package exists, utilize parallel computing with "parallel::mclapply"
+            # library(parallel)
 
-            fit_all <- mclapply( dataObj, function(x) {
+            fit_all <- parallel::mclapply( dataObj, function(x) {
                 .deconWrapper( fData=x, estDeltaSigma=estDeltaSigma, init=init,
 					deltaInit=deltaCommon, sigmaInit=sigmaCommon, lbDelta=lbDelta, lbSigma=lbSigma,
                     psize=psize, max_comp=maxComp, pConst=pConst,

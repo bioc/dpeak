@@ -14,7 +14,7 @@ Objects can be created by calls of the form \code{new("DpeakData", ...)}.
 }
 \section{Slots}{
   \describe{
-    \item{\code{fragSet}:}{Object of class \code{"list"}, 
+    \item{\code{fragSet}:}{Object of class \code{"list"},
         representing list of fragments for each peak. }
     \item{\code{PET}:}{Object of class \code{"logical"},
         representing whether it is paired-end tag (PET) or single-end tag (SET) data. }
@@ -39,8 +39,8 @@ Objects can be created by calls of the form \code{new("DpeakData", ...)}.
 \section{Methods}{
   \describe{
     \item{dpeakFit}{\code{signature(object = "DpeakData")}: fit the deconvolution model. }
-    \item{plot}{\code{signature(x = "BinData", y = "missing", filename=NULL, 
-        strand=FALSE, extension=1, smoothing=FALSE )}: 
+    \item{plot}{\code{signature(x = "BinData", y = "missing", filename=NULL,
+        strand=FALSE, extension=1, smoothing=FALSE )}:
         provide exploratory plots of fragments or reads in each peak region.
         Plots are exported to a PDF file (its file name is specified in \code{filename}).
         Options \code{strand}, \code{extension}, and \code{smoothing} are supported only for SET data.
@@ -49,7 +49,7 @@ Objects can be created by calls of the form \code{new("DpeakData", ...)}.
         If \code{smoothing=TRUE}, a smoothed plot (using the smoothing spline) is provided.
         If \code{strand=FALSE}, strand information is ignored.}
     \item{print}{\code{signature(x = "DpeakData")}: (not supported yet) }
-    \item{printEmpty}{\code{signature(x = "DpeakData")}: 
+    \item{printEmpty}{\code{signature(x = "DpeakData")}:
         provide the data frame of peak regions without reads. }
     \item{show}{\code{signature(object = "DpeakData")}: provide brief summary of the object. }
      }
@@ -58,8 +58,7 @@ Objects can be created by calls of the form \code{new("DpeakData", ...)}.
 \seealso{
 \code{\link{dpeakRead}}, \code{\link{dpeakFit}}.
 }
-\examples{
-showClass("DpeakData")
+
 \examples{
 data(exampleData)
 exampleData
