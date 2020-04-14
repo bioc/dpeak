@@ -8,7 +8,7 @@ Implement de novo motif analysis based on the peak list, using MEME and FIMO.
 }
 \usage{
 dpeakMotif( peakfile=NULL, refGenome=NULL, flanking=100,
-	memeArgument="-dna -mod zoops -nmotifs 1 -minw 10 -maxw 20 -revcomp -maxsize 1000000000", 
+	memeArgument="-dna -mod zoops -nmotifs 1 -minw 10 -maxw 20 -revcomp -maxsize 1000000000",
 	fimoArgument="-max-stored-scores 100000000 -motif-pseudo 0.000001",
     tempDir=NULL )
 }
@@ -35,8 +35,9 @@ Construct \code{DpeakMotif} class object.
 \code{\link{dpeakFit}}, \code{\linkS4class{DpeakMotif}}.
 }
 \examples{
+\dontrun{
 library(BSgenome.Ecoli.NCBI.20080805)
 resultMotif <- dpeakMotif( peakfile="vignettes/examplePeak.txt", refGenome=Ecoli )
-}
+}}
 \keyword{models}
 \keyword{methods}

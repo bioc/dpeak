@@ -1,5 +1,5 @@
 
-Changes in version 0.99.x (2020-04-14):
+Changes in version 0.99.18 (2020-04-14):
 
     o   Formatted package for Bioconductor. Changes include:
 	o Added runnable examples
