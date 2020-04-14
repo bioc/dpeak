@@ -96,7 +96,7 @@
 						# initialize binding events with local max
 
 						if ( length(lmax_ordered) >= ( n_comp - length(locmotif) ) ) {
-							mu_init_plus <- lmax_ordered[ seq_len(n_comp - length(locmotif)) ) ]
+							mu_init_plus <- lmax_ordered[ seq_len(n_comp - length(locmotif)) ]
 						} else {
 							# use uniformly distribute binding events, if we don't have enough points
 
