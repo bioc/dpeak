@@ -219,7 +219,7 @@ setMethod(
 )
 
 setMethod(
-    f="exportPlot",
+    f="plot",
     signature=c("DpeakFit","missing"),
     definition=function( x, y, filename=NULL, plotType="fit",
         strand=FALSE, extension=1, smoothing=FALSE,
