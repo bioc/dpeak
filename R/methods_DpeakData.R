@@ -140,7 +140,7 @@ setMethod(
 
 setMethod(
     f="exportPlot",
-    signature=c("DpeakData","missing"),
+    signature=c("DpeakData"),
     definition=function( x, y, filename=NULL, strand=FALSE, extension=1, smoothing=FALSE, ... ) {
         # extract estimates
 
