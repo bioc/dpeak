@@ -258,7 +258,7 @@ setMethod(
 )
 
 setMethod(
-    f="export",
+    f="exportPeakList",
     signature="DpeakFit",
     definition=function( object, type=NA, filename=NA, ... ) {
         # error treatment: check invalid type

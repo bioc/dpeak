@@ -75,9 +75,9 @@ setGeneric(
 
 # generic methods for "DpeakFit" class
 
-setGeneric( "export",
+setGeneric( "exportPeakList",
     function( object, ... )
-    standardGeneric("export")
+    standardGeneric("exportPeakList")
 )
 
 setGeneric(

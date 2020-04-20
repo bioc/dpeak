@@ -245,9 +245,9 @@ Peak calling results can be exported in TXT, BED, and GFF file formats,
 respectively, by the commands:
 
 <<dpeakfit-export>>=
-export( exampleFit, type="txt", filename="result.txt" )
-export( exampleFit, type="bed", filename="result.bed" )
-export( exampleFit, type="gff", filename="result.gff" )
+exportPeakList( exampleFit, type="txt", filename="result.txt" )
+exportPeakList( exampleFit, type="bed", filename="result.bed" )
+exportPeakList( exampleFit, type="gff", filename="result.gff" )
 @
 
 \end{document}
