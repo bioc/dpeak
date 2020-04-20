@@ -2,7 +2,7 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{DpeakData-class}
-\alias{plot,DpeakData,missing-method}
+\alias{exportPlot,DpeakData,missing-method}
 \alias{print,DpeakData-method}
 \alias{show,DpeakData-method}
 \title{Class "DpeakData" }
@@ -39,7 +39,7 @@ Objects can be created by calls of the form \code{new("DpeakData", ...)}.
 \section{Methods}{
   \describe{
     \item{dpeakFit}{\code{signature(object = "DpeakData")}: fit the deconvolution model. }
-    \item{plot}{\code{signature(x = "BinData", y = "missing", filename=NULL,
+    \item{exportPlot}{\code{signature(x = "BinData", y = "missing", filename=NULL,
         strand=FALSE, extension=1, smoothing=FALSE )}:
         provide exploratory plots of fragments or reads in each peak region.
         Plots are exported to a PDF file (its file name is specified in \code{filename}).

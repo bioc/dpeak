@@ -45,33 +45,33 @@ Maintainer: Dongjun Chung <chungdon@stat.wisc.edu>
 dataPET <- dpeakRead( peakfile="examplePeak.txt", readfile="examplePETRead.txt",
     fileFormat="eland_result", PET=TRUE )
 dataPET
-plot( dataPET, filename="exPETplot.pdf" )
+exportPlot( dataPET, filename="exPETplot.pdf" )
 
 fitPET <- dpeakFit( dataPET )
 fitPET
-plot( fitPET, filename="exPETResult.pdf", plotType="fit" )
-plot( fitPET, filename="exPETGOF.pdf", plotType="GOF" )
+exportPlot( fitPET, filename="exPETResult.pdf", plotType="fit" )
+exportPlot( fitPET, filename="exPETGOF.pdf", plotType="GOF" )
 
 # work flow for SET data
 
 dataSET <- dpeakRead( peakfile="examplePeak.txt", readfile="exampleSETRead.txt",
     fileFormat="eland_result", PET=FALSE, fragLen=150 )
 dataSET
-plot( dataSET, filename="exSETplot_combined.pdf", strand=FALSE )
-plot( dataSET, filename="exSETplot_strand_1.pdf",
+exportPlot( dataSET, filename="exSETplot_combined.pdf", strand=FALSE )
+exportPlot( dataSET, filename="exSETplot_strand_1.pdf",
     strand=TRUE, extension=1, smoothing=TRUE )
-plot( dataSET, filename="exSETplot_strand_150.pdf",
+exportPlot( dataSET, filename="exSETplot_strand_150.pdf",
     strand=TRUE, extension=150, smoothing=FALSE )
 
 fitSET <- dpeakFit( dataSET )
 fitSET
-plot( fitSET, filename="exSETResult_combined.pdf",
+exportPlot( fitSET, filename="exSETResult_combined.pdf",
     plotType="fit", strand=FALSE )
-plot( fitSET, filename="exSETResult_strand_1.pdf",
+exportPlot( fitSET, filename="exSETResult_strand_1.pdf",
     plotType="fit", strand=TRUE, extension=1, smoothing=TRUE )
-plot( fitSET, filename="exSETResult_strand_150.pdf",
+exportPlot( fitSET, filename="exSETResult_strand_150.pdf",
     plotType="fit", strand=TRUE, extension=150, smoothing=FALSE )
-plot( fitSET, filename="exSETGOF.pdf", plotType="GOF" )
+exportPlot( fitSET, filename="exSETGOF.pdf", plotType="GOF" )
 
 # (common for both PET and SET data)
 
