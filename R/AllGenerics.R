@@ -2,7 +2,7 @@
 # generic methods for "DpeakData" class
 
 setGeneric( "exportPlot",
-    function( object, ... )
+    function( ... )
     standardGeneric("exportPlot")
 )
 
