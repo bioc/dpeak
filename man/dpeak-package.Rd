@@ -6,7 +6,7 @@
 dPeak (Deconvolution of Peaks in ChIP-seq Analysis)
 }
 \description{
-This package provides functions for fitting dPeak, 
+This package provides functions for fitting dPeak,
 a statistical framework to deconvolve ChIP-seq peaks.
 }
 \details{
@@ -21,7 +21,7 @@ LazyLoad: \tab yes\cr
 This package contains two main classes, \code{DpeakData} and \code{DpeakFit},
 which represent dPeak data and deconvolution model fit, respectively.
 This package contains two main methods, \code{dpeakRead} and \code{dpeakFit}.
-\code{dpeakRead} method imports peak list and aligned read file and 
+\code{dpeakRead} method imports peak list and aligned read file and
 construct \code{DpeakData} class object.
 \code{dpeakFit} method fits deconvolution model using \code{DpeakData} class object and
  constructs \code{DpeakFit} class object.
@@ -35,14 +35,14 @@ Maintainer: Dongjun Chung <chungdon@stat.wisc.edu>
 }
 \keyword{ package }
 \seealso{
-\code{\link{dpeakRead}}, \code{\link{dpeakFit}}, \code{\link{export}}, 
+\code{\link{dpeakRead}}, \code{\link{dpeakFit}}, \code{\link{exportPeakList}},
 \code{\linkS4class{DpeakData}}, \code{\linkS4class{DpeakFit}}.
 }
 \examples{
 \dontrun{
 # work flow for PET data
 
-dataPET <- dpeakRead( peakfile="examplePeak.txt", readfile="examplePETRead.txt", 
+dataPET <- dpeakRead( peakfile="examplePeak.txt", readfile="examplePETRead.txt",
     fileFormat="eland_result", PET=TRUE )
 dataPET
 plot( dataPET, filename="exPETplot.pdf" )
@@ -54,29 +54,29 @@ plot( fitPET, filename="exPETGOF.pdf", plotType="GOF" )
 
 # work flow for SET data
 
-dataSET <- dpeakRead( peakfile="examplePeak.txt", readfile="exampleSETRead.txt", 
-    fileFormat="eland_result", PET=FALSE, fragLen=150 ) 
+dataSET <- dpeakRead( peakfile="examplePeak.txt", readfile="exampleSETRead.txt",
+    fileFormat="eland_result", PET=FALSE, fragLen=150 )
 dataSET
 plot( dataSET, filename="exSETplot_combined.pdf", strand=FALSE )
-plot( dataSET, filename="exSETplot_strand_1.pdf", 
+plot( dataSET, filename="exSETplot_strand_1.pdf",
     strand=TRUE, extension=1, smoothing=TRUE )
-plot( dataSET, filename="exSETplot_strand_150.pdf", 
+plot( dataSET, filename="exSETplot_strand_150.pdf",
     strand=TRUE, extension=150, smoothing=FALSE )
 
 fitSET <- dpeakFit( dataSET )
 fitSET
-plot( fitSET, filename="exSETResult_combined.pdf", 
+plot( fitSET, filename="exSETResult_combined.pdf",
     plotType="fit", strand=FALSE )
-plot( fitSET, filename="exSETResult_strand_1.pdf", 
+plot( fitSET, filename="exSETResult_strand_1.pdf",
     plotType="fit", strand=TRUE, extension=1, smoothing=TRUE )
-plot( fitSET, filename="exSETResult_strand_150.pdf", 
+plot( fitSET, filename="exSETResult_strand_150.pdf",
     plotType="fit", strand=TRUE, extension=150, smoothing=FALSE )
 plot( fitSET, filename="exSETGOF.pdf", plotType="GOF" )
 
 # (common for both PET and SET data)
 
-export( fitSET, type="txt", filename="result.txt" )
-export( fitSET, type="bed", filename="result.bed" )
-export( fitSET, type="gff", filename="result.gff" )
+exportPeakList( fitSET, type="txt", filename="result.txt" )
+exportPeakList( fitSET, type="bed", filename="result.bed" )
+exportPeakList( fitSET, type="gff", filename="result.gff" )
 }
 }

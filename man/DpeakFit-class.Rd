@@ -36,7 +36,7 @@ Objects can be created by calls of the form \code{new("DpeakFit", ...)}.
         representing list of BIC values for each peak. }
     \item{\code{aicVec}:}{Object of class \code{"list"},
         representing list of AIC values for each peak. }
-    \item{\code{fragSet}:}{Object of class \code{"list"}, 
+    \item{\code{fragSet}:}{Object of class \code{"list"},
         representing list of fragments for each peak. }
     \item{\code{PET}:}{Object of class \code{"logical"},
         representing whether it is paired-end tag (PET) or single-end tag (SET) data. }
@@ -78,17 +78,17 @@ Objects can be created by calls of the form \code{new("DpeakFit", ...)}.
 }
 \section{Methods}{
   \describe{
-    \item{plot}{\code{signature(x = "DpeakFit", y = "missing", filename=NULL, 
+    \item{plot}{\code{signature(x = "DpeakFit", y = "missing", filename=NULL,
         plotType="fit", strand=FALSE, extension=1, smoothing=FALSE,
-        threshold=0.10, nsimul=10000, seed=12345, nCore=8)}: 
-        draw plots of deconvolution results if \code{plotType="fit"}, 
+        threshold=0.10, nsimul=10000, seed=12345, nCore=8)}:
+        draw plots of deconvolution results if \code{plotType="fit"},
         goodness of fit (GOF) plots if \code{plotType="GOF"},
-        or plots of Bayesian information criterion (BIC) 
+        or plots of Bayesian information criterion (BIC)
         and Akaike information criterion (AIC) curves if \code{plotType="BIC"}.
         Plots are exported to a PDF file (its file name is specified in \code{filename}).
         In deconvolution result plots, binding sites with strength larger than \code{threshold}
         are drawn in dark blue and other binding sites are drawn in light blue.
-        When \code{plotType="fit"}, 
+        When \code{plotType="fit"},
         options \code{strand}, \code{extension}, and \code{smoothing} are supported for SET data.
         If \code{strand=TRUE}, reads are plotted in a strand-specific manner,
         where reads are extended to \code{extension} from its 5' end.
@@ -103,7 +103,7 @@ Objects can be created by calls of the form \code{new("DpeakFit", ...)}.
 }
 \author{ Dongjun Chung }
 \seealso{
-\code{\link{dpeakFit}}, \code{\link{export}}.
+\code{\link{dpeakFit}}, \code{\link{exportPeakList}}.
 }
 \examples{
 
