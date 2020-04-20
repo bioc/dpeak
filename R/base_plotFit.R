@@ -25,7 +25,7 @@
 
         if ( is.na(object@fragSet[[i]][1,1]) ) {
 
-            exportPlot( 0, 0, type="n", xlab="", ylab="", axes=FALSE,
+            plot( 0, 0, type="n", xlab="", ylab="", axes=FALSE,
                 main=plot_title, xlim=c(-5,5), ylim=c(-5,5) )
             text( 0, 0, "No fragment (read) in the peak region" )
 
@@ -64,7 +64,7 @@
         } else {
             # combined
 
-            exportPlot( object@stackedFragment[[i]][,1], object@stackedFragment[[i]][,2], type="l",
+            plot( object@stackedFragment[[i]][,1], object@stackedFragment[[i]][,2], type="l",
                 xlab="Genomic coordinates", ylab="Frequency",
                 main=plot_title,
                 xlim=xlim, ylim=c(0,max(object@stackedFragment[[i]][,2])*1.2) )

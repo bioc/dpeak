@@ -139,8 +139,8 @@ setMethod(
 )
 
 setMethod(
-    f="exportPlot",
-    signature=c("DpeakData"),
+    f="plot",
+    signature=c("DpeakData","missing"),
     definition=function( x, y, filename=NULL, strand=FALSE, extension=1, smoothing=FALSE, ... ) {
         # extract estimates
 

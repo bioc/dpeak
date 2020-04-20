@@ -2,7 +2,7 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{DpeakMotif-class}
-\alias{exportPlot,DpeakMotif,missing-method}
+\alias{plot,DpeakMotif,missing-method}
 \alias{print,DpeakMotif-method}
 \alias{show,DpeakMotif-method}
 \title{Class "DpeakMotif" }

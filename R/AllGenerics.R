@@ -1,11 +1,6 @@
 
 # generic methods for "DpeakData" class
 
-setGeneric( "exportPlot",
-    function( ... )
-    standardGeneric("exportPlot")
-)
-
 setGeneric( "printEmpty",
     function( object, ... )
     standardGeneric("printEmpty")

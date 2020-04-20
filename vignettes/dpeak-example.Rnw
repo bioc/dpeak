@@ -116,7 +116,7 @@ In addition, for PET data, median fragment length is also provided
 exampleData
 @
 
-`\texttt{exportPlot}' method exports exploratory plots for the ChIP data to a PDF file.
+`\texttt{plot}' method exports exploratory plots for the ChIP data to a PDF file.
 Its file name needs to be specified in the `\texttt{filename}' argument.
 These plots show number of reads (or fragments) aligned to each position within each peak region.
 For SET data, if `\texttt{strand=TRUE}', reads are plotted in a strand-specific manner,
@@ -127,9 +127,9 @@ a smoothed plot (using the smoothing spline) is provided.
 Unsmoothed plot is provided by default.
 
 <<dpeakdata-plot,eval=FALSE>>=
-exportPlot( exampleData, filename="examplePlot_combined.pdf",
+plot( exampleData, filename="examplePlot_combined.pdf",
 	strand=FALSE )
-exportPlot( exampleData, filename="examplePlot_strand_1.pdf",
+plot( exampleData, filename="examplePlot_strand_1.pdf",
 	strand=TRUE, extension=1, smoothing=TRUE )
 @
 
@@ -175,7 +175,7 @@ such as median number of binding events in each peak region.
 exampleFit
 @
 
-`\texttt{exportPlot}' method exports the plots of estimated binding sites (`\texttt{plotType="fit"}')
+`\texttt{plot}' method exports the plots of estimated binding sites (`\texttt{plotType="fit"}')
 or the goodness of fit (GOF) plots (`\texttt{plotType="GOF"}') to a PDF file.
 Its file name needs to be specified in the `\texttt{filename}' argument.
 In both of these plots, estimated binding sites or simulated fragments are superimposed on
@@ -188,10 +188,10 @@ If `\texttt{smoothing=TRUE}', a smoothed plot (using the smoothing spline) is pr
 Unsmoothed plot is provided by default.
 
 <<dpeakfit-plot,eval=FALSE>>=
-exportPlot( exampleFit, filename="exampleResult_combined.pdf" )
-exportPlot( exampleFit, filename="exampleResult_strand_1.pdf",
+plot( exampleFit, filename="exampleResult_combined.pdf" )
+plot( exampleFit, filename="exampleResult_strand_1.pdf",
 	strand=TRUE, extension=1, smoothing=TRUE )
-exportPlot( exampleFit, filename="exGOF.pdf", plotType="GOF" )
+plot( exampleFit, filename="exGOF.pdf", plotType="GOF" )
 @
 
 Figures \ref{fig:dpeakfit-fit-combined-plot} and \ref{fig:dpeakfit-fit-strand-plot}
