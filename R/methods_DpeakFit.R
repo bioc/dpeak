@@ -219,7 +219,7 @@ setMethod(
 )
 
 setMethod(
-    f="plot",
+    f="exportPlot",
     signature=c("DpeakFit","missing"),
     definition=function( x, y, filename=NULL, plotType="fit",
         strand=FALSE, extension=1, smoothing=FALSE,
@@ -234,14 +234,6 @@ setMethod(
             .plotFit( object=x, threshold=threshold,
                 strand=strand, extension=extension, smoothing=smoothing )
         } else if ( plotType == "GOF" ) {
-
-            # error treatment
-
-            #if ( plotType == "GOF" & strand == TRUE ) {
-            #    stop( "'strand=TRUE' is not supported for GOF plot!" )
-            #}
-
-            # GOF plot
 
             .plotGOF( object=x, nsimul=nsimul, seed=seed,
                 extension=extension, smoothing=smoothing, nCore=nCore )
