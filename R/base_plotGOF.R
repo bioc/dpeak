@@ -109,7 +109,7 @@
 
         # plot simulated data
 
-        if ( PET == TRUE ) {
+        if ( isTRUE(PET) ) {
             # PET
 
             simX <- stackedSimFrag[,1]

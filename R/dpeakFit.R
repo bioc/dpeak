@@ -79,7 +79,7 @@ setMethod(
         # extract objects
 
         PET <- get_PET(object)
-        if ( PET == TRUE ) {
+        if ( isTRUE(PET) ) {
             L_table <- get_fragLenTable(object)
             aveFragLen <- NA
         } else {
