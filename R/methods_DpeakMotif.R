@@ -62,11 +62,3 @@ setMethod(
     	}
     }
 )
-
-setMethod(
-    f="print",
-    signature="DpeakMotif",
-    definition=function( x ) {
-        warning( "'print' method for 'DpeakMotif' class is not supported yet." )
-    }
-)

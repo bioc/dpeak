@@ -3,7 +3,6 @@
 \docType{class}
 \alias{DpeakData-class}
 \alias{plot,DpeakData,missing-method}
-\alias{print,DpeakData-method}
 \alias{show,DpeakData-method}
 \title{Class "DpeakData" }
 \description{
@@ -48,7 +47,6 @@ Objects can be created by calls of the form \code{new("DpeakData", ...)}.
         where reads are extended to \code{extension} from its 5' end.
         If \code{smoothing=TRUE}, a smoothed plot (using the smoothing spline) is provided.
         If \code{strand=FALSE}, strand information is ignored.}
-    \item{print}{\code{signature(x = "DpeakData")}: (not supported yet) }
     \item{printEmpty}{\code{signature(x = "DpeakData")}:
         provide the data frame of peak regions without reads. }
     \item{show}{\code{signature(object = "DpeakData")}: provide brief summary of the object. }

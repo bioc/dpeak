@@ -3,7 +3,6 @@
 \docType{class}
 \alias{DpeakFit-class}
 \alias{plot,DpeakFit,missing-method}
-\alias{print,DpeakFit-method}
 \alias{show,DpeakFit-method}
 \title{Class "DpeakFit" }
 \description{
@@ -96,7 +95,6 @@ Objects can be created by calls of the form \code{new("DpeakFit", ...)}.
         If \code{strand=FALSE}, strand information is ignored.
         For the GOF plots, \code{nsimul} fragments are simulated from the fitted model
         (\code{seed} indicates random seed; \code{nCore} CPUs are used for parallel computing).}
-    \item{print}{\code{signature(x = "DpeakFit")}: (not supported yet) }
     \item{show}{\code{signature(object = "DpeakFit")}:
         provide brief summary of the object. }
      }

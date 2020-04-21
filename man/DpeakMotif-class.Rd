@@ -3,7 +3,6 @@
 \docType{class}
 \alias{DpeakMotif-class}
 \alias{plot,DpeakMotif,missing-method}
-\alias{print,DpeakMotif-method}
 \alias{show,DpeakMotif-method}
 \title{Class "DpeakMotif" }
 \description{
@@ -29,7 +28,6 @@ Objects can be created by calls of the form \code{new("DpeakMotif", ...)}.
 \section{Methods}{
   \describe{
     \item{dpeakFit}{\code{signature(object = "DpeakMotif")}: fit the deconvolution model. }
-    \item{print}{\code{signature(x = "DpeakMotif")}: (not supported yet) }
     \item{show}{\code{signature(object = "DpeakMotif")}: provide brief summary of the object. }
      }
 }

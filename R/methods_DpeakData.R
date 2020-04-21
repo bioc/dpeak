@@ -98,14 +98,6 @@ setMethod(
 )
 
 setMethod(
-    f="print",
-    signature="DpeakData",
-    definition=function( x ) {
-        warning( "'print' method for 'DpeakData' class is not supported yet." )
-    }
-)
-
-setMethod(
     f="printEmpty",
     signature="DpeakData",
     definition=function( object, ... ) {

@@ -10,6 +10,6 @@ importFrom("utils", "installed.packages", "read.table")
 
 export( dpeakRead, dpeakMotif, dpeakFit )
 
-export( show, plot, print, printEmpty )
+export( show, plot, printEmpty )
 
 export( exportPeakList )

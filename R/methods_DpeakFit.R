@@ -204,14 +204,6 @@ setMethod(
 )
 
 setMethod(
-    f="print",
-    signature="DpeakFit",
-    definition=function( x ) {
-        warning( "'print' method for 'DpeakFit' class is not supported yet." )
-    }
-)
-
-setMethod(
     f="plot",
     signature=c("DpeakFit","missing"),
     definition=function( x, y, filename=NULL, plotType="fit",
