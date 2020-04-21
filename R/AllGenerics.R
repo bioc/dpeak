@@ -1,5 +1,9 @@
 
 # generic methods for "DpeakData" class
+setGeneric( "exportPlot",
+    function( x, y, ... )
+    standardGeneric("exportPlot")
+)
 
 setGeneric( "printEmpty",
     function( object, ... )

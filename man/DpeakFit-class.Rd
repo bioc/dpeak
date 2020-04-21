@@ -2,7 +2,7 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{DpeakFit-class}
-\alias{plot,DpeakFit,missing-method}
+\alias{exportPlot,DpeakFit,missing-method}
 \alias{show,DpeakFit-method}
 \title{Class "DpeakFit" }
 \description{
@@ -77,7 +77,7 @@ Objects can be created by calls of the form \code{new("DpeakFit", ...)}.
 }
 \section{Methods}{
   \describe{
-    \item{plot}{\code{signature(x = "DpeakFit", y = "missing", filename=NULL,
+    \item{exportPlot}{\code{signature(x = "DpeakFit", y = "missing", filename=NULL,
         plotType="fit", strand=FALSE, extension=1, smoothing=FALSE,
         threshold=0.10, nsimul=10000, seed=12345, nCore=8)}:
         draw plots of deconvolution results if \code{plotType="fit"},
