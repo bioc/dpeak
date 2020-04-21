@@ -11,7 +11,7 @@
     # error treatment
 
     if ( extension < 1 ) {
-        stop( "Negative 'extension' is not allowed!" )
+        stop( "Error: A negative 'extension' is not allowed." )
     }
 
     # plot
@@ -39,7 +39,7 @@
 
         Ni <- nrow(get_fragSet(object)[[i]])
 
-        if ( strand==TRUE ) {
+        if ( strand ) {
 
             .plotStrandData( stackedFragment=get_stackedFragment(object)[[i]],
                 fragSet=get_fragSet(object)[[i]], plot_title=plot_title, xlim=xlim,

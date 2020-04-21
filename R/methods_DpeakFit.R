@@ -220,22 +220,22 @@ setMethod(
 
         pdf( filename )
 
-        if ( plotType == "fit" ) {
+        if ( identical(plotType,"fit") ) {
 
             # fitting results
 
             .plotFit( object=x, threshold=threshold,
                 strand=strand, extension=extension, smoothing=smoothing )
-        } else if ( plotType == "GOF" ) {
+        } else if ( identical(plotType,"GOF") ) {
 
             .plotGOF( object=x, nsimul=nsimul, seed=seed,
                 extension=extension, smoothing=smoothing, nCore=nCore )
-        } else if ( plotType == "BIC" ) {
+        } else if ( identical(plotType,"BIC") ) {
             # plot of BIC curve
 
             .plotBIC( object=x )
         } else {
-            stop( "Inappropriate 'plotType'! Use either 'fit', 'GOF', or 'BIC'!" )
+            stop( "Error: Inappropriate 'plotType'. Please choose either 'fit', 'GOF', or 'BIC'." )
         }
 
         dev.off()

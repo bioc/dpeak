@@ -41,7 +41,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     message( "Info: Reading peak list..." )
     peakSet <- read.table( peakfile, header=FALSE, stringsAsFactors=FALSE )
     nPeak <- nrow(peakSet)
-    gc()
 
     # match chromosomes between peak list and reads
 
@@ -56,7 +55,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     message( "Info: Processing and combining peak list and reads..." )
 
-    if ( parallel == TRUE ) {
+    if ( parallel ) {
         out <- parallel::mclapply( chrCommon,
             function(x) .matchPeakRead( chr=x, peakCur=peakByChr[[x]],
                 outfileName=paste(tempfileName[1],"_",x,sep=""),
@@ -78,7 +77,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     emptyList <- c()
     cur <- 1
 
-    if ( PET == FALSE ) {
+    if ( !PET ) {
         nF <- nAll <- rep( NA, length(chrCommon) )
     }
 
@@ -100,14 +99,14 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
             cur <- cur + 1
         }
 
-        if ( PET == FALSE ) {
+        if ( !PET ) {
             nF[chr] <- out[[chr]]$nFCur
             nAll[chr] <- out[[chr]]$nAllCur
         }
     }
     names(fragSet) <- nameVec
 
-    if ( PET == TRUE ) {
+    if ( PET ) {
         fragLen <- c()
         for ( chr in seq_len(length(chrCommon)) ) {
             fragLen <- c( fragLen, out[[chr]]$fragLenCur )
@@ -118,12 +117,9 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         emptyList <- ""
     }
 
-    rm( out )
-    gc()
-
     # check proportion of forward reads for SET data
 
-    if ( PET == TRUE ) {
+    if ( PET ) {
         Fratio <- 0.5
     } else {
         Fratio <- sum(nF) / sum(nAll)
@@ -131,7 +127,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     # stack fragment (projection to coordinates)
 
-    if ( parallel == TRUE ) {
+    if ( parallel ) {
         stackedFragment <- parallel::mclapply( fragSet, .stackFragment, mc.cores = nCore )
     } else {
         stackedFragment <- lapply( fragSet, .stackFragment )
@@ -149,9 +145,8 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         fragLenTable <- table( fragLen )
         aveFragLen <- fragLen
     }
-    gc()
 
-    message( "Info: Done!\n" )
+    message( "Info: Done.\n" )
 
     # remove temporary files after use
 
@@ -176,7 +171,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     message( "[Note] Use 'printEmpty' method to check the list.\n" )
     message( "Number of utilized reads: ",sumRead,"\n", sep="" )
     message( "Median number of reads in each peak: ",medNumRead,"\n", sep="" )
-    if ( PET == TRUE ) {
+    if ( PET ) {
         message( "Median fragment length: ",aveFragLen,"\n", sep="" )
     } else {
         message( "Fragment length (provided by user): ",aveFragLen,"\n", sep="" )
@@ -201,7 +196,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     # - PET read: chr, start, end
     # - SET read: chr, position, strand, read length
 
-    if ( PET == TRUE ) {
+    if ( PET ) {
         # if PET, (chrID, start, end)
 
         readCur <- read.table( outfileName, sep='\t', nrows=nRow,
@@ -217,7 +212,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
             check.names=FALSE )
         colnames(readCur) <- c("chrID","start","end","str")
     }
-    gc()
 
     # match reads for each peak region
 
@@ -253,8 +247,8 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     # check proportion of forward reads for SET data
 
-    if ( PET == FALSE ) {
-        nFCur <- length(which( readCur[,4]=="F" ))
+    if ( !PET ) {
+        nFCur <- length(which( identical(readCur[,4],"F") ))
         nAllCur <- nrow(readCur)
     } else {
         nFCur <- nAllCur <- NA
@@ -262,7 +256,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     # calculate fragment length for PET data
 
-    if ( PET == TRUE ) {
+    if ( PET ) {
         fragLenCur <- readCur[,3] - readCur[,2] + 1
     } else {
         fragLenCur <- NA

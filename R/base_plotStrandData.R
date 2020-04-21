@@ -7,10 +7,10 @@
 
     # forward strand
 
-    if ( PET == FALSE ) {
+    if ( !PET ) {
         # SET
 
-        indF <- which( fragSet[,3] == "F" )
+        indF <- which( identical(fragSet[,3], "F") )
 
         if ( length(indF) > 0 ) {
             Fstart <- fragSet[ indF, 1 ]
@@ -41,7 +41,7 @@
 
     # reverse strand
 
-    if ( PET == FALSE ) {
+    if ( !PET ) {
         # SET
 
         if ( nrow(fragSet) - length(indF) > 0 ) {

@@ -35,7 +35,7 @@
             optList_i$maxS <- max(get_stackedFragment(object)[[i]][,1])
             optList_i$peakstart <- peakStart[i]
             optList_i$peakend <- peakEnd[i]
-            if ( PET == FALSE ) {
+            if ( !PET ) {
                 optList_i$delta <- get_optDelta(object)[[i]]
                 optList_i$sigma <- get_optSigma(object)[[i]]
             }
@@ -91,7 +91,7 @@
         xlim[2] <- max( get_peakEnd(object)[i], get_stackedFragment(object)[[i]][,1],
             stackedSimFrag[,1] )
 
-        if ( PET == FALSE ) {
+        if ( !PET ) {
             .plotStrandData( stackedFragment=get_stackedFragment(object)[[i]],
                 fragSet=get_fragSet(object)[[i]], plot_title=plot_title, xlim=xlim,
                 PET=PET, extension=extension, smoothing=smoothing )
@@ -109,7 +109,7 @@
 
         # plot simulated data
 
-        if ( PET == TRUE ) {
+        if ( PET ) {
             # PET
 
             simX <- stackedSimFrag[,1]
@@ -151,5 +151,5 @@
         }
     }
 
-    message( "Info: Done!" )
+    message( "Info: Done." )
 }

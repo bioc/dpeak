@@ -20,14 +20,14 @@
         E <- frag[,2]
         midp <- ( S + E ) / 2
 
-        if ( PET == FALSE ) {
+        if ( !PET ) {
             # SET
 
             strand <- frag[,3]
             N <- nrow(frag)
 
-            locF <- which( strand=="F" )
-            locR <- which( strand=="R" )
+            locF <- which( identical(strand,"F") )
+            locR <- which( identical(strand,"R") )
             FRvec <- rep( 1, N )
             FRvec[ locF ] <- Fratio
             FRvec[ locR ] <- 1 - Fratio
@@ -55,7 +55,7 @@
 
         fit_list <- mu_list <- pi_list <- pi0_list <- vector( "list", max_comp )
 
-        if ( PET == FALSE ) {
+        if ( !PET ) {
             delta_list <- sigma_list <- vector( "list", max_comp )
         } else {
             gamma_list <- vector( "list", max_comp )
@@ -77,7 +77,7 @@
 				} else {
 					# use other approaches if we don't have enough points
 
-					if ( init == "localmax" ) {
+					if ( identical(init,"localmax") ) {
 						# distribute binding events based on strength
 
 						# identify local max
@@ -102,7 +102,7 @@
 						}
 
 						mu_init <- c( locmotif_ordered, mu_init_plus )
-					} else if ( init == "uniform" ) {
+					} else if ( identical(init,"uniform") ) {
 						# uniformly distribute binding events
 
 						mu_init <- seq( min(midp), max(midp), length=(n_comp+2) )
@@ -114,7 +114,7 @@
 			} else {
 				# no sequence information
 
-				if ( init == "localmax" ) {
+				if ( identical(init,"localmax") ) {
 					# distribute binding events based on strength
 
 					# identify local max
@@ -137,7 +137,7 @@
 						mu_unif <- mu_unif[ -c(1,length(mu_unif)) ]
 						mu_init <- c( lmax_ordered, mu_unif[ seq_len(n_comp - length(lmax_ordered)) ] )
 					}
-				} else if ( init == "uniform" ) {
+				} else if ( identical(init,"uniform") ) {
 					# uniformly distribute binding events
 					mu_init <- seq( min(midp), max(midp), length=(n_comp+2) )
 					mu_init <- mu_init[ -c(1,length(mu_init)) ]
@@ -148,7 +148,7 @@
 
 
 
-            if ( PET == FALSE ) {
+            if ( !PET ) {
                 # ---------------------------- SET ----------------------------
 
 				if ( is.na(deltaInit) ) {
@@ -207,7 +207,7 @@
             pi_list[[n_comp]] <- fit$pi
             pi0_list[[n_comp]] <- fit$pi0
 
-            if ( PET == FALSE ) {
+            if ( !PET ) {
                 delta_list[[n_comp]] <- round( fit$delta )
                 sigma_list[[n_comp]] <- round( fit$sigma )
             } else {
@@ -226,7 +226,7 @@
     if ( success ) {
         # if succeeded to fit the model, combine models with same dim
 
-        if ( PET == FALSE ) {
+        if ( !PET ) {
             cmodel <- .combineModelSET( fit_list, mu_list, pi_list, pi0_list,
                 delta_list, sigma_list, BIC_vec, AIC_vec, max_comp )
         } else {
@@ -240,7 +240,7 @@
         pi_list <- cmodel$pi_list
         pi0_list <- cmodel$pi0_list
 
-        if ( PET == FALSE ) {
+        if ( !PET ) {
             delta_list <- cmodel$delta_list
             sigma_list <- cmodel$sigma_list
         } else {
@@ -260,7 +260,7 @@
         optPi <- pi_list[[ optModel ]]
         optPi0 <- pi0_list[[ optModel ]]
 
-        if ( PET == FALSE ) {
+        if ( !PET ) {
             optDelta <- delta_list[[ optModel ]]
             optSigma <- sigma_list[[ optModel ]]
             optGamma <- NA

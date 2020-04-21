@@ -57,7 +57,7 @@
 
             if ( verbose ) {
                 if ( sum(Z[,g]) == 0 ) {
-                    message( "Warning: all elements in Z vector is zero!" )
+                    message( "Warning: all elements in Z vector is zero." )
                     message( "peak region: ", grid_min, "-", grid_max )
                     message( "event number: ", g )
                 }
@@ -151,7 +151,7 @@
 
 		# M step: update delta & sigma, if common peak shape is not used
 
-		if ( estDeltaSigma == "separate" ) {
+		if ( identical(estDeltaSigma, "separate") ) {
 
 			# M step: update delta
 

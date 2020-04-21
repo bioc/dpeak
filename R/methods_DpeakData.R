@@ -86,7 +86,7 @@ setMethod(
         cat( "Number of peaks: ",length(peakChr),"\n", sep="" )
         cat( "Number of chromosomes: ",length(chrList),"\n", sep="" )
         cat( "Tag type: ",ifelse(PET,"PET","SET"),"\n", sep="" )
-        if ( PET == TRUE ) {
+        if ( PET ) {
             cat( "Median fragment length: ",aveFragLen,"\n", sep="" )
         } else {
             cat( "Fragment length (provided by user): ",aveFragLen,"\n", sep="" )
@@ -109,7 +109,7 @@ setMethod(
     f="printEmpty",
     signature="DpeakData",
     definition=function( object, ... ) {
-        if ( get_emptyList(object)[1] == "" ) {
+        if ( identical(get_emptyList(object)[1],"") ) {
             message( "Every peak region has at least one read." )
         } else {
             out <- apply( as.matrix(get_emptyList(object)), 1,
@@ -148,7 +148,7 @@ setMethod(
         # error treatment
 
         if ( extension < 1 ) {
-            stop( "Negative 'extension' is not allowed!" )
+            stop( "Error: A negative 'extension' value is not allowed." )
         }
 
         # plot
@@ -178,7 +178,7 @@ setMethod(
             xlim[1] <- min( get_peakStart(x)[i], get_stackedFragment(x)[[i]][,1] )
             xlim[2] <- max( get_peakEnd(x)[i], get_stackedFragment(x)[[i]][,1] )
 
-            if ( strand==TRUE ) {
+            if ( strand ) {
 
                 .plotStrandData( stackedFragment=get_stackedFragment(x)[[i]],
                     fragSet=get_fragSet(x)[[i]], plot_title=plot_title, xlim=xlim,
