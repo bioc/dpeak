@@ -17,12 +17,12 @@ setMethod(
 
 		# how to initialize binding events
 
-		if ( identical(init,"localmax") ) {
+		if ( init == "localmax" ) {
 			message( "Info: positions of binding events are initialized based on signal strength." )
-		} else if ( identical(init,"uniform") ) {
+		} else if ( init == "uniform" ) {
 			message( "Info: positions of binding events are initialized uniformly over the candidate region." )
 		} else {
-			stop( "Error: Inappropriate 'init' argument. Please choose either 'localmax' or 'uniform'." )
+			stop( "Inappropriate 'init' argument! It should be either 'localmax' or 'uniform'." )
 		}
 
         # safe guard: iterInit, iterMain
@@ -38,13 +38,13 @@ setMethod(
 
         # safe guard: estDeltaSigma
 
-        if ( !get_PET(object) ) {
-            if ( identical(estDeltaSigma,"separate") ) {
+        if ( get_PET(object) == FALSE ) {
+            if ( estDeltaSigma == "separate" ) {
                 message( "Info: estimate peak shape for each candidate region, separately." )
-            } else if ( identical(estDeltaSigma,"common") ) {
+            } else if ( estDeltaSigma == "common" ) {
                 message( "Info: estimate common peak shape using top candidate regions." )
             } else {
-                stop( "Error: Inappropriate 'estDeltaSigma' argument" )
+                stop( "Inappropriate 'estDeltaSigma' argument!" )
             }
         }
 
@@ -79,7 +79,7 @@ setMethod(
         # extract objects
 
         PET <- get_PET(object)
-        if ( PET ) {
+        if ( PET == TRUE ) {
             L_table <- get_fragLenTable(object)
             aveFragLen <- NA
         } else {
@@ -90,7 +90,7 @@ setMethod(
 
 		# estimation of common peak shape
 
-		if ( identical(estDeltaSigma,"common") ) {
+		if ( estDeltaSigma == "common" ) {
 
 			# choose top candidate regions
 
@@ -156,7 +156,10 @@ setMethod(
 			deltaCommon <- deltaCommon / ntotal
 			sigmaCommon <- sigmaCommon / ntotal
 
-    } else if ( identical(estDeltaSigma,"separate") ) {
+			rm( dataObj )
+			gc()
+
+        } else if ( estDeltaSigma == "separate" ) {
 
 			deltaCommon <- NA
 			sigmaCommon <- NA
@@ -203,6 +206,9 @@ setMethod(
                 } )
         }
 
+        rm( dataObj )
+        gc()
+
         # select optimal model
 
         fits <- vector( "list", length(get_fragSet(object)) )
@@ -216,7 +222,7 @@ setMethod(
             optMu[[i]] <- fit_all[[i]]$optMu
             optPi[[i]] <- fit_all[[i]]$optPi
             optPi0[[i]] <- fit_all[[i]]$optPi0
-            if ( !PET ) {
+            if ( PET == FALSE ) {
                 optDelta[[i]] <- fit_all[[i]]$optDelta
                 optSigma[[i]] <- fit_all[[i]]$optSigma
             } else {
@@ -225,6 +231,8 @@ setMethod(
             bicVec[[i]] <- fit_all[[i]]$bicVec
             aicVec[[i]] <- fit_all[[i]]$aicVec
         }
+        rm( fit_all )
+        gc()
 
         names(fits) <- names(optFit) <- names(optMu) <- names(optPi) <- names(optPi0) <-
         names(optGamma) <- names(optDelta) <- names(optSigma) <- names(bicVec) <- names(aicVec) <-

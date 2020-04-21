@@ -19,7 +19,7 @@
     peakstart <- object$peakstart
     peakend <- object$peakend
     nGroup <- length(mu)
-    if ( !PET  ) {
+    if ( PET == FALSE ) {
         delta <- object$delta
         sigma <- object$sigma
     }
@@ -29,7 +29,7 @@
     simG <- rep( seq_len(length(mu)), ceiling(pi*nsimul) )
     simS <- simE <- rep( NA, length(simG) )
 
-    if ( PET ) {
+    if ( PET == TRUE ) {
         simL <- sample( Lvalue, length(simG), prob=Lprob, replace=TRUE )
         simLlist <- split( simL, simG )
     } else {
@@ -115,7 +115,7 @@
         groupVec <- c( groupVec, rep(0,ceiling(nsimul*pi0)) )
     }
 
-    if ( PET ) {
+    if ( PET == TRUE ) {
         return( data.frame( simS, simE, stringsAsFactors=FALSE ) )
     } else {
         return( data.frame( simS, simE, simD, stringsAsFactors=FALSE ) )
