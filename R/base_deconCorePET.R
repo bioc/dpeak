@@ -42,7 +42,7 @@
 
     for ( i in seq(from = 2, to = niter) ) {
         if ( verbose ) {
-            print( paste("------------ iteration:",i,"------------") )
+            message( paste("------------ iteration:",i,"------------") )
         }
 
         ########################################################################
@@ -51,28 +51,18 @@
         #                                                                      #
         ########################################################################
 
-        #print("E step")
-
         muRange <- IRanges( start=mu, end=mu )
         mm <- as.matrix( findOverlaps( muRange, fragRange ) )
         mms <- split( mm[,2], mm[,1] )
-        #indg_list <- lapply( mms, function(x) {
-        #    out <- rep( 0, N )
-        #    out[x] <- 1
-        #    return(out)
-        #} )
 
         Z <- matrix( NA, N, n_group )
         for ( g in seq_len(n_group) ) {
             if ( any( names(mms) == g ) ) {
-                #indg <- indg_list[[ as.character(g) ]]
 				Z[ , g ] <- pi[g] * ( gamma / (R-1) )
 				Z[ mms[[ as.character(g) ]], g ] <- pi[g] * ( ( 1 - gamma ) / L )
             } else {
-                #indg <- rep( 0, N )
 				Z[,g] <- gamma / (R-1)
             }
-            #Z[,g] <- pi[g] * ( ( ( 1 - gamma ) / L )*indg + ( gamma / (R-1) )*( 1 - indg ) )
 
             # check at least one element in Z[,g] is non-zero
 
@@ -97,8 +87,6 @@
         #                                                                      #
         ########################################################################
 
-        #print("M step")
-
         # M step: update mu
 
         for ( g in seq_len(n_group) ) {
@@ -106,8 +94,6 @@
             mu_max <- grid_vec[ yvar == max(yvar) ]
             mu[g] <- median(mu_max)
         }
-
-        # safe guard for mu estimates (case: nothing left)
 
         if ( length(mu) == 0 || all(is.na(mu)) ) {
 	        mu_old <- mu_mat[ (i-1), ]
@@ -123,8 +109,6 @@
         }
 
         # M step: update pi
-
-        #pi <- apply( Z, 2, sum ) / N
 		pi <- colSums(Z) / N
         pi0 <- sum(Z0) / N
 
@@ -140,23 +124,14 @@
         muRange <- IRanges( start=mu, end=mu )
         mm <- as.matrix( findOverlaps( muRange, fragRange ) )
         mms <- split( mm[,2], mm[,1] )
-        #indg_list <- lapply( mms, function(x) {
-        #    out <- rep( 0, N )
-        #    out[x] <- 1
-        #    return(out)
-        #} )
 
         gamma <- 0
         for ( g in seq_len(n_group) ) {
-            #indg <- as.numeric( S <= mu[g] & mu[g] <= E )
             if ( any( names(mms) == g ) ) {
-                #indg <- indg_list[[ as.character(g) ]]
 				gamma <- gamma + sum( Z[ -mms, g ] )
             } else {
-                #indg <- rep( 0, N )
 				gamma <- gamma + sum( Z[ , g ] )
             }
-            #gamma <- gamma + sum( Z[,g] * ( 1 - indg ) )
         }
         gamma <- gamma / N
 
@@ -291,31 +266,27 @@
         gamma_vec[i] <- gamma
 
         if ( verbose ) {
-            print( "mu: " )
-            print( mu )
-            print( "pi: " )
-            print( pi )
-            print( "pi0: " )
-            print( pi0 )
-            print( "gamma: " )
-            print( gamma )
+            message( "mu: " )
+            message( mu )
+            message( "pi: " )
+            message( pi )
+            message( "pi0: " )
+            message( pi0 )
+            message( "gamma: " )
+            message( gamma )
         }
 
         # track complete log likelihood
 
         ll[i] <- .loglikPET( fragRange, L, mu, pi, pi0, gamma, R, alpha )
-        #print(ll[i])
         if ( verbose ) {
-            print( "increment in loglik:" )
-            print( ll[i]-ll[(i-1)] )
+            message( "increment in loglik:" )
+            message( ll[i]-ll[(i-1)] )
         }
 
         # if loglik decreases, stop iteration
 
-        #print(ll[i])
         if ( ll[i] < ll[(i-1)] ) {
-            #print(i)
-            #print( "log lik decreases!!!" )
 
             # use estimates in the last iteration
 
@@ -349,7 +320,7 @@
             # stop if no improvement in loglik
 
             if ( verbose ) {
-                print( "stop because there is no improvements in likelihood." )
+                message( "stop because there is no improvements in likelihood." )
             }
 
             mu_mat <- mu_mat[ seq_len(i), , drop=FALSE ]
@@ -367,7 +338,7 @@
             abs( pi0_vec[i] - pi0_vec[(i-1)] ) < stop_eps &&
             abs( gamma_vec[i] - gamma_vec[(i-1)] ) < stop_eps ) {
                 if ( verbose ) {
-                    print( "stop because there is no improvements in estimates." )
+                    message( "stop because there is no improvements in estimates." )
                 }
 
                 mu_mat <- mu_mat[ seq_len(i), , drop=FALSE ]

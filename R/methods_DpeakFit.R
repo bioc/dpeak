@@ -184,17 +184,12 @@ setMethod(
         optMu <- get_optMu(object)
         optPi0 <- get_optPi0(object)
         maxComp <- get_maxComp(object)
-        #bgComp <- object@bgComp
 
         # summary
 
         med_opt_mu <- median( unlist( lapply( optMu,
             function(x) ifelse( any(!is.na(x)), length(x), 0 )
         ) ) )
-        #nonzero_pi0_list <- unlist( lapply( optPi0,
-        #    function(x) ifelse( any(!is.na(x)), as.numeric(x>0), 0 )
-        #) )
-        #nonzero_pi0 <- round( 100 * sum(nonzero_pi0_list) / length(nonzero_pi0_list) )
         pi0_vec <- unlist( optPi0 )
         med_explain <- round( 100 * median( 1 - pi0_vec, na.rm=TRUE ) ) / 100
 
@@ -203,8 +198,6 @@ setMethod(
         cat( "------------------------------------------------------------\n" )
         cat( "- Maximum possible number of binding events in each peak: ",maxComp,"\n", sep="" )
         cat( "- Median number of binding events in each peak: ",med_opt_mu,"\n", sep="" )
-        #cat( "- Use background components to estimate binding sites? ",ifelse(bgComp,"Yes","No"),"\n", sep="" )
-        #cat( "- Percentage of peaks with non-zero background proportion: ",nonzero_pi0," %\n", sep="" )
         cat( "- Median explanation ratio: ",med_explain," %\n", sep="" )
         cat( "------------------------------------------------------------\n" )
     }
@@ -299,12 +292,9 @@ setMethod(
         # process fitting results for exporting
 
         peakName <- paste( peakChr, ":", peakStart, "-", peakEnd, sep="" )
-        #chrVec <- muVec <- piVec <- nameVec <- c()
         chrVec <- muVec <- strengthVec <- nameVec <- c()
         for ( i in seq_len(length(optMu)) ) {
             # error treatment: skip peaks with no fragments
-
-            #if ( any(is.na(optMu[[i]])) ) {
             if ( is.na(get_fragSet(object)[[i]][1,1]) ) {
                 next;
             }
@@ -313,7 +303,6 @@ setMethod(
 
             chrVec <- c( chrVec, rep( peakChr[i], length(optMu[[i]]) ) )
             muVec <- c( muVec, optMu[[i]] )
-            #piVec <- c( piVec, 1000 * optPi[[i]] )
             strengthVec <- c( strengthVec, nrow(get_fragSet(object)[[i]]) * optPi[[i]] )
             nameVec <- c( nameVec, rep( peakName[i], length(optMu[[i]]) ) )
         }
@@ -324,7 +313,6 @@ setMethod(
 
         switch( type,
             "gff" = {
-                #.exportGFF( chrVec=chrVec, muVec=muVec, piVec=piVec, psize=psize,
                 .exportGFF( chrVec=chrVec, muVec=muVec,
                     strengthVec=strengthVec, psize=psize,
                     nameVec=nameVec, filename=filename )

@@ -13,7 +13,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         message( "Info: Single-end tag (SET) is assumed (PET=FALSE)." )
         message( "Info: Average fragment length is set as ",fragLen," (fragLen=",fragLen,")." )
     }
-    #print( Sys.time() )
 
     message( "Info: Reading and processing aligned read file..." )
 
@@ -35,7 +34,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         stringsAsFactors=FALSE, comment.char="", check.names=FALSE )
     colnames(summaryInfo) <- c("chrID","nline")
     readChr <- summaryInfo[,1]
-    #print( Sys.time() )
 
     # process peak set & reads (assume BED file format)
     # - peak set: assume that first 3 columns of both files are chr, start, end
@@ -44,7 +42,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     peakSet <- read.table( peakfile, header=FALSE, stringsAsFactors=FALSE )
     nPeak <- nrow(peakSet)
     gc()
-    #print( Sys.time() )
 
     # match chromosomes between peak list and reads
 
@@ -123,7 +120,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
 
     rm( out )
     gc()
-    #print( Sys.time() )
 
     # check proportion of forward reads for SET data
 
@@ -141,7 +137,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         stackedFragment <- lapply( fragSet, .stackFragment )
     }
     names(stackedFragment) <- nameVec
-    #print( Sys.time() )
 
     # if PET, calculate distribution of fragment length
 
@@ -157,7 +152,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     gc()
 
     message( "Info: Done!\n" )
-    #print( Sys.time() )
 
     # remove temporary files after use
 
@@ -172,26 +166,26 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     sumRead <- sum(nFrag)
     medNumRead <- median(nFrag)
 
-    cat( "------------------------------------------------------------\n" )
-    cat( "Info: Preprocessing summary\n" )
-    cat( "------------------------------------------------------------\n" )
-    cat( "Tag type: ",ifelse(PET,"PET","SET"),"\n", sep="" )
-    cat( "Number of chromosomes: ",length(chrCommon),"\n", sep="" )
-    cat( "Number of peaks: ",nPeak,"\n", sep="" )
-    cat( "Number of peaks without reads: ",nEmpty,"\n", sep="" )
-    cat( "[Note] Use 'printEmpty' method to check the list.\n" )
-    cat( "Number of utilized reads: ",sumRead,"\n", sep="" )
-    cat( "Median number of reads in each peak: ",medNumRead,"\n", sep="" )
+    message( "------------------------------------------------------------\n" )
+    message( "Info: Preprocessing summary\n" )
+    message( "------------------------------------------------------------\n" )
+    message( "Tag type: ",ifelse(PET,"PET","SET"),"\n", sep="" )
+    message( "Number of chromosomes: ",length(chrCommon),"\n", sep="" )
+    message( "Number of peaks: ",nPeak,"\n", sep="" )
+    message( "Number of peaks without reads: ",nEmpty,"\n", sep="" )
+    message( "[Note] Use 'printEmpty' method to check the list.\n" )
+    message( "Number of utilized reads: ",sumRead,"\n", sep="" )
+    message( "Median number of reads in each peak: ",medNumRead,"\n", sep="" )
     if ( PET == TRUE ) {
-        cat( "Median fragment length: ",aveFragLen,"\n", sep="" )
+        message( "Median fragment length: ",aveFragLen,"\n", sep="" )
     } else {
-        cat( "Fragment length (provided by user): ",aveFragLen,"\n", sep="" )
+        message( "Fragment length (provided by user): ",aveFragLen,"\n", sep="" )
         Fper <- round( 100 * Fratio )
         Rper <- 100 - Fper
-        cat( "Percentage of forward strand reads: ",Fper," %\n", sep="" )
-        cat( "Percentage of reverse strand reads: ",Rper," %\n", sep="" )
+        message( "Percentage of forward strand reads: ",Fper," %\n", sep="" )
+        message( "Percentage of reverse strand reads: ",Rper," %\n", sep="" )
     }
-    cat( "------------------------------------------------------------\n" )
+    message( "------------------------------------------------------------\n" )
 
     new( "DpeakData", fragSet=fragSet, PET=PET, fragLenTable=fragLenTable,
         aveFragLen=aveFragLen, Fratio=Fratio, stackedFragment=stackedFragment,

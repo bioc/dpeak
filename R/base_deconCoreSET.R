@@ -62,8 +62,6 @@
         #                                                                      #
         ########################################################################
 
-        #print("E step")
-
         Z <- matrix( NA, N, n_group )
         for ( g in seq_len(n_group) ) {
           Z[,g] <- pi[g] * ( ( Fratio * dnorm( S, mu[g] - delta, sigma ) * indF +
@@ -81,8 +79,6 @@
         #                      CM step: update mu                              #
         #                                                                      #
         ########################################################################
-
-        #print("M step")
 
         # M step: update mu
 
@@ -135,12 +131,6 @@
 
 			# safe guard for delta & sigma
 
-			#if ( delta < 25 ) {
-			#    delta <- 25
-			#}
-			#if ( sigma < 25 ) {
-			#    sigma <- 25
-			#}
 			if ( delta < lbDelta ) {
 				delta <- lbDelta
 			}
@@ -264,18 +254,13 @@
 
         ll[i] <- .loglikSET( S, E, strand, mu, pi, pi0, delta, sigma,
             Fratio, sindex, beta, R, alpha )
-        #print(ll[i])
         if ( verbose ) {
           print( "increment in loglik:" )
           print( ll[i]-ll[(i-1)] )
         }
 
         # if loglik decreases, stop iteration
-
-        #print(ll[i])
         if ( ll[i] < ll[(i-1)] ) {
-          #print(i)
-          #print( "log lik decreases!!!" )
 
           # use estimates in the last iteration
 
@@ -354,7 +339,4 @@
       return( list( mu=mu, pi=pi, pi0=pi0, delta=delta, sigma=sigma,
         mu_mat=mu_mat, pi_mat=pi_mat, pi_vec=pi0_vec, delta_vec=delta_vec, sigma_vec=sigma_vec,
         Z=Z, Z0=Z0, loglik=ll, AIC=aicValue, BIC=bicValue ) )
-      #return( list( mu=mu, pi=pi, delta=delta, sigma=sigma,
-      #  mu_mat=mu_mat, pi_mat=pi_mat, delta_vec=delta_vec, sigma_vec=sigma_vec,
-      #  Z=Z, loglik=ll, AIC=aicValue, BIC=bicValue ) )
 }

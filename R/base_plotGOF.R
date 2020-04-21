@@ -5,23 +5,22 @@
 
     # extract estimates
 
-    maxComp <- object@maxComp
-    #bgComp <- object@bgComp
-    peakStart <- object@peakStart
-    peakEnd <- object@peakEnd
+    maxComp <- get_maxComp(object)
+    peakStart <- get_peakStart(object)
+    peakEnd <- get_peakEnd(object)
 
-    PET <- object@PET
-    fragLenTable <- object@fragLenTable
-    aveFragLen <- object@aveFragLen
-    Fratio <- object@Fratio
+    PET <- get_PET(object)
+    fragLenTable <- get_fragLenTable(object)
+    aveFragLen <- get_aveFragLen(object)
+    Fratio <- get_Fratio(bject)
 
     # generate list to generate fragments
 
-    optList <- vector( "list", length(object@optMu) )
-    for ( i in seq_len(length(object@optMu)) ) {
+    optList <- vector( "list", length(get_optMu(object)) )
+    for ( i in seq_len(length(get_optMu(object))) ) {
         # error treatment: skip peaks with no fragments
 
-        if ( is.na(object@fragSet[[i]][1,1]) ) {
+        if ( is.na(get_fragSet(object)[[i]][1,1]) ) {
             optList[[i]] <- matrix( NA )
         } else {
             # stack info
@@ -29,16 +28,16 @@
             optList_i <- list()
 
             optList_i$nsimul <- nsimul
-            optList_i$mu <- object@optMu[[i]]
-            optList_i$pi <- object@optPi[[i]]
-            optList_i$pi0 <- object@optPi0[[i]]
-            optList_i$minS <- min(object@stackedFragment[[i]][,1])
-            optList_i$maxS <- max(object@stackedFragment[[i]][,1])
+            optList_i$mu <- get_optMu(object)[[i]]
+            optList_i$pi <- get_optPi(object)[[i]]
+            optList_i$pi0 <- get_optPi0(object)[[i]]
+            optList_i$minS <- min(get_stackedFragment(object)[[i]][,1])
+            optList_i$maxS <- max(get_stackedFragment(object)[[i]][,1])
             optList_i$peakstart <- peakStart[i]
             optList_i$peakend <- peakEnd[i]
             if ( PET == FALSE ) {
-                optList_i$delta <- object@optDelta[[i]]
-                optList_i$sigma <- object@optSigma[[i]]
+                optList_i$delta <- get_optDelta(object)[[i]]
+                optList_i$sigma <- get_optSigma(object)[[i]]
             }
             optList[[i]] <- optList_i
         }
@@ -55,7 +54,6 @@
 
     if ( is.element( "parallel", installed.packages()[,1] ) ) {
         # if "parallel" package exists, utilize parallel computing with "parallel::mclapply"
-        # library(parallel)
 
         simList <- parallel::mclapply( optList, function(x) {
             simFrag <- .generateFragment( object=x,
@@ -69,7 +67,6 @@
         # otherwise, use usual "lapply"
 
         simList <- lapply( optList, function(x) {
-            #x <- optList[[i]]
             simFrag <- .generateFragment( object=x,
                 PET=PET, Lvalue=Lvalue, Lprob=Lprob,
                 Fratio=Fratio, aveFragLen=aveFragLen )
@@ -83,14 +80,14 @@
 
     message( "Info: Generating GOF plots..." )
 
-    for ( i in seq_len(length(object@stackedFragment)) ) {
+    for ( i in seq_len(length(get_stackedFragment(object))) ) {
 
-        plot_title <- paste(object@peakChr[i],": ",
-            object@peakStart[i],"-",object@peakEnd[i],sep="")
+        plot_title <- paste(get_peakChr(object)[i],": ",
+            get_peakStart(object)[i],"-",get_peakEnd(object)[i],sep="")
 
         # flag if there are no reads in the peak region
 
-        if ( is.na(object@fragSet[[i]][1,1]) ) {
+        if ( is.na(get_fragSet(object)[[i]][1,1]) ) {
 
             plot( 0, 0, type="n", xlab="", ylab="", axes=FALSE,
                 main=plot_title, xlim=c(-5,5), ylim=c(-5,5) )
@@ -104,38 +101,26 @@
         stackedSimFrag <- simList[[i]]$stackedFragment
 
         xlim <- rep( NA, 2 )
-        xlim[1] <- min( object@peakStart[i], object@stackedFragment[[i]][,1],
+        xlim[1] <- min( get_peakStart(object)[i], get_stackedFragment(object)[[i]][,1],
             stackedSimFrag[,1] )
-        xlim[2] <- max( object@peakEnd[i], object@stackedFragment[[i]][,1],
+        xlim[2] <- max( get_peakEnd(object)[i], get_stackedFragment(object)[[i]][,1],
             stackedSimFrag[,1] )
 
         if ( PET == FALSE ) {
-            .plotStrandData( stackedFragment=object@stackedFragment[[i]],
-                fragSet=object@fragSet[[i]], plot_title=plot_title, xlim=xlim,
+            .plotStrandData( stackedFragment=get_stackedFragment(object)[[i]],
+                fragSet=get_fragSet(object)[[i]], plot_title=plot_title, xlim=xlim,
                 PET=PET, extension=extension, smoothing=smoothing )
-
-            #if ( extension == 1 ) {
-            #    legend( "topright", lty=c(1,1), col=c("black","red"),
-            #        c("Stacked reads (forward)","Stacked reads (reverse)")
-            #    )
-            #} else {
-            #    legend( "topright", lty=c(1,1), col=c("black","red"),
-            #        c("Stacked extended reads (forward)","Stacked extended reads (reverse)")
-            #    )
-            #}
         } else {
             # PET
 
-            plot( object@stackedFragment[[i]][,1],
-                object@stackedFragment[[i]][,2], type="l",
+            plot( get_stackedFragment(object)[[i]][,1],
+                get_stackedFragment(object)[[i]][,2], type="l",
                 xlab="Genomic coordinates", ylab="Frequency",
                 main=plot_title,
-                xlim=xlim, ylim=c(0,max(object@stackedFragment[[i]][,2])*1.2) )
-
-            #legend( "topright", lty=1, col="black", "Stacked fragments" )
+                xlim=xlim, ylim=c(0,max(get_stackedFragment(object)[[i]][,2])*1.2) )
         }
-        abline( v=object@peakStart[i], col="red", lty=2 )
-        abline( v=object@peakEnd[i], col="red", lty=2 )
+        abline( v=get_peakStart(object)[i], col="red", lty=2 )
+        abline( v=get_peakEnd(object)[i], col="red", lty=2 )
 
         # plot simulated data
 
@@ -143,20 +128,17 @@
             # PET
 
             simX <- stackedSimFrag[,1]
-            simY <- stackedSimFrag[,2] * max(object@stackedFragment[[i]][,2]) /
+            simY <- stackedSimFrag[,2] * max(get_stackedFragment(object)[[i]][,2]) /
                 max(stackedSimFrag[,2])
                 # adjust frequency to make frequency comparable to observed one
             lines( simX, simY, col="gray", lty=2 )
-
-            #abline( v=peakStart[i], col="red", lty=2 )
-            #abline( v=peakEnd[i], col="red", lty=2 )
 
             legend( "topright", lty=c(1,2), col=c("black","gray"),
                 c("Stacked fragments (data)","Stacked fragments (simulated)") )
         } else {
             # SET
 
-            ratio <- max(object@stackedFragment[[i]][,2]) /
+            ratio <- max(get_stackedFragment(object)[[i]][,2]) /
                 max(stackedSimFrag[,2])
 
             .lineStrandData( stackedFragment=stackedSimFrag,

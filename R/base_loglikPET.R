@@ -1,12 +1,9 @@
 
 # log likelihood
-
-#.loglikPET <- function( S, E, L, mu, pi, pi0, gamma, R, alpha ) {
 .loglikPET <- function( fragRange, L, mu, pi, pi0, gamma, R, alpha ) {
 
   # initialization
 
-  #N <- length(S)
   N <- length(L)
   n_group <- length(mu)
   out <- alpha
@@ -24,14 +21,11 @@
 
   out_g <- rep( 0, N )
   for ( g in seq_len(n_group) ) {
-        #indg <- as.numeric( S <= mu[g] & mu[g] <= E )
         if ( any( names(mms) == g ) ) {
             indg <- indg_list[[ as.character(g) ]]
         } else {
             indg <- rep( 0, N )
         }
-        #out_g <- out_g + pi[g] * ( ( 1 - gamma ) / L )^indg * ( gamma / R )^( 1 - indg )
-        #out_g <- out_g + pi[g] * ( ( ( 1 - gamma ) / L )*indg + ( gamma / R )*( 1 - indg ) )
         out_g <- out_g + pi[g] * ( ( ( 1 - gamma ) / L )*indg + ( gamma / (R-1) )*( 1 - indg ) )
   }
 
@@ -39,7 +33,6 @@
   out_g <- out_g + termBG
 
   nonzero <- which( out_g > 0 )
-  #out <- sum(log( out[ nonzero ] * out_g[ nonzero ] ))
   out <- sum(log( ( out * out_g )[ nonzero ] ))
 
   return(out)

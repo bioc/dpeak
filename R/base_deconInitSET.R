@@ -43,7 +43,7 @@
 
     for ( i in seq(from = 2, to = niter) ) {
         if ( verbose ) {
-            print( paste("------------ iteration:",i,"------------") )
+            message( paste("------------ iteration:",i,"------------") )
         }
 
         # SE step: stochastic classification
@@ -193,12 +193,6 @@
 
 			# safe guard for delta & sigma
 
-			#if ( delta < 25 ) {
-			#    delta <- 25
-			#}
-			#if ( sigma < 25 ) {
-			#    sigma <- 25
-			#}
 			if ( delta < lbDelta ) {
 				delta <- lbDelta
 			}
@@ -235,7 +229,6 @@
             pi <- pi_new
             n_group <- length(mu)
         }
-        #print(mu)
 
         # track estimates
 
@@ -246,16 +239,16 @@
         sigma_vec[i] <- sigma
 
         if ( verbose ) {
-            print( "mu: " )
-            print( mu )
-            print( "pi: " )
-            print( pi )
-            print( "pi0: " )
-            print( pi0 )
-            print( "delta: " )
-            print( delta )
-            print( "sigma: " )
-            print( sigma )
+            message( "mu: " )
+            message( mu )
+            message( "pi: " )
+            message( pi )
+            message( "pi0: " )
+            message( pi0 )
+            message( "delta: " )
+            message( delta )
+            message( "sigma: " )
+            message( sigma )
         }
     }
 

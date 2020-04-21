@@ -12,10 +12,6 @@
 	locmotif <- fData$locmotif
 
     if ( is.na(frag[1,1]) ) {
-    #if ( nrow(frag) == 0 ) {
-        # if peak has no fragment, skip the model fitting
-
-        #message( "Warning: No fragment in this peak region ",peak[1],"-",peak[2],"!" )
         success <- FALSE
     } else {
         # starting & end positions of each peak
@@ -109,7 +105,6 @@
 					} else if ( init == "uniform" ) {
 						# uniformly distribute binding events
 
-						#mu_init <- seq( min((S+E)/2), max((S+E)/2), length=(n_comp+2) )
 						mu_init <- seq( min(midp), max(midp), length=(n_comp+2) )
 						mu_init <- mu_init[ -c(1,length(mu_init)) ]
 					}
@@ -144,8 +139,6 @@
 					}
 				} else if ( init == "uniform" ) {
 					# uniformly distribute binding events
-
-					#mu_init <- seq( min((S+E)/2), max((S+E)/2), length=(n_comp+2) )
 					mu_init <- seq( min(midp), max(midp), length=(n_comp+2) )
 					mu_init <- mu_init[ -c(1,length(mu_init)) ]
 				}
@@ -215,7 +208,6 @@
             pi0_list[[n_comp]] <- fit$pi0
 
             if ( PET == FALSE ) {
-                #pi0_list[[n_comp]] <- fit$pi0
                 delta_list[[n_comp]] <- round( fit$delta )
                 sigma_list[[n_comp]] <- round( fit$sigma )
             } else {
@@ -238,8 +230,6 @@
             cmodel <- .combineModelSET( fit_list, mu_list, pi_list, pi0_list,
                 delta_list, sigma_list, BIC_vec, AIC_vec, max_comp )
         } else {
-            #cmodel <- .combineModelPET( fit_list, mu_list, pi_list,
-            #    gamma_list, BIC_vec, AIC_vec, max_comp )
             cmodel <- .combineModelPET( fit_list, mu_list, pi_list, pi0_list,
                 gamma_list, BIC_vec, AIC_vec, max_comp )
         }
@@ -251,7 +241,6 @@
         pi0_list <- cmodel$pi0_list
 
         if ( PET == FALSE ) {
-            #pi0_list <- cmodel$pi0_list
             delta_list <- cmodel$delta_list
             sigma_list <- cmodel$sigma_list
         } else {
@@ -272,13 +261,11 @@
         optPi0 <- pi0_list[[ optModel ]]
 
         if ( PET == FALSE ) {
-            #optPi0 <- pi0_list[[ optModel ]]
             optDelta <- delta_list[[ optModel ]]
             optSigma <- sigma_list[[ optModel ]]
             optGamma <- NA
         } else {
             optGamma <- gamma_list[[ optModel ]]
-            #optPi0 <- optDelta <- optSigma <- NA
             optDelta <- optSigma <- NA
         }
 

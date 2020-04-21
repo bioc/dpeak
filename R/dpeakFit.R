@@ -38,7 +38,7 @@ setMethod(
 
         # safe guard: estDeltaSigma
 
-        if ( object@PET == FALSE ) {
+        if ( get_PET(object) == FALSE ) {
             if ( estDeltaSigma == "separate" ) {
                 message( "Info: estimate peak shape for each candidate region, separately." )
             } else if ( estDeltaSigma == "common" ) {
@@ -78,15 +78,15 @@ setMethod(
 
         # extract objects
 
-        PET <- object@PET
+        PET <- get_PET(object)
         if ( PET == TRUE ) {
-            L_table <- object@fragLenTable
+            L_table <- get_fragLenTable(object)
             aveFragLen <- NA
         } else {
             L_table <- NA
-            aveFragLen <- object@aveFragLen
+            aveFragLen <- get_aveFragLen(object)
         }
-        Fratio <- object@Fratio
+        Fratio <- get_Fratio(object)
 
 		# estimation of common peak shape
 
@@ -94,7 +94,7 @@ setMethod(
 
 			# choose top candidate regions
 
-			nread <- sapply( object@fragSet, nrow )
+			nread <- sapply( get_fragSet(object), nrow )
 			nTopFinal <- min( nTop, length(nread) )
 			nreadCutoff <- sort( nread, decreasing=TRUE )[ nTopFinal ]
 
@@ -104,12 +104,12 @@ setMethod(
 				isel <- selvec[i]
 
 				dataObj[[i]] <- list()
-				dataObj[[i]]$frag <- object@fragSet[[isel]]
-				dataObj[[i]]$peak <- c( object@peakStart[isel], object@peakEnd[isel] )
-				dataObj[[i]]$signal <- object@stackedFragment[[isel]]
+				dataObj[[i]]$frag <- get_fragSet(object)[[isel]]
+				dataObj[[i]]$peak <- c( get_peakStart(object)[isel], get_peakEnd(object)[isel] )
+				dataObj[[i]]$signal <- get_stackedFragment(object)[[isel]]
 
 				if ( !is.null(objectMotif) ) {
-					dataObj[[i]]$locmotif <- objectMotif@locMotif[[isel]]
+					dataObj[[i]]$locmotif <- get_locMotif(objectMotif)[[isel]]
 				} else {
 					dataObj[[i]]$locmotif <- NA
 				}
@@ -119,7 +119,6 @@ setMethod(
 
 			if ( is.element( "parallel", installed.packages()[,1] ) ) {
 				# if "parallel" package exists, utilize parallel computing with "parallel::mclapply"
-				# library(parallel)
 
 				fit_top <- parallel::mclapply( dataObj, function(x) {
 					.deconWrapper( fData=x, estDeltaSigma="separate", init=init,
@@ -168,15 +167,15 @@ setMethod(
 
         # construct object for model fitting
 
-        dataObj <- vector( "list", length(object@fragSet) )
-        for ( i in seq_len(length(object@fragSet)) ) {
+        dataObj <- vector( "list", length(get_fragSet(object)) )
+        for ( i in seq_len(length(get_fragSet(object))) ) {
             dataObj[[i]] <- list()
-            dataObj[[i]]$frag <- object@fragSet[[i]]
-            dataObj[[i]]$peak <- c( object@peakStart[i], object@peakEnd[i] )
-			dataObj[[i]]$signal <- object@stackedFragment[[i]]
+            dataObj[[i]]$frag <- get_fragSet(object)[[i]]
+            dataObj[[i]]$peak <- c( get_peakStart(object)[i], get_peakEnd(object)[i] )
+			dataObj[[i]]$signal <- get_stackedFragment(object)[[i]]
 
 			if ( !is.null(objectMotif) ) {
-				dataObj[[i]]$locmotif <- objectMotif@locMotif[[i]]
+				dataObj[[i]]$locmotif <- get_locMotif(objectMotif)[[i]]
 			} else {
 				dataObj[[i]]$locmotif <- NA
 			}
@@ -186,7 +185,6 @@ setMethod(
 
         if ( is.element( "parallel", installed.packages()[,1] ) ) {
             # if "parallel" package exists, utilize parallel computing with "parallel::mclapply"
-            # library(parallel)
 
             fit_all <- parallel::mclapply( dataObj, function(x) {
                 .deconWrapper( fData=x, estDeltaSigma=estDeltaSigma, init=init,
@@ -197,7 +195,6 @@ setMethod(
                     stop_eps=epsilon, verbose=verbose )
                 }, mc.cores = nCore )
         } else {
-            # otherwise, use usual "lapply"
 
             fit_all <- lapply( dataObj, function(x) {
                 .deconWrapper( fData=x, estDeltaSigma=estDeltaSigma, init=init,
@@ -214,12 +211,12 @@ setMethod(
 
         # select optimal model
 
-        fits <- vector( "list", length(object@fragSet) )
+        fits <- vector( "list", length(get_fragSet(object)) )
         optFit <- optMu <- optPi <- optPi0 <-
             optGamma <- optDelta <- optSigma <- bicVec <- aicVec <-
-            vector( "list", length(object@fragSet) )
+            vector( "list", length(get_fragSet(object)) )
 
-        for ( i in seq_len(length(object@fragSet)) ) {
+        for ( i in seq_len(length(get_fragSet(object))) ) {
             fits[[i]] <- fit_all[[i]]$fits
             optFit[[i]] <- fit_all[[i]]$optFit
             optMu[[i]] <- fit_all[[i]]$optMu
@@ -239,7 +236,7 @@ setMethod(
 
         names(fits) <- names(optFit) <- names(optMu) <- names(optPi) <- names(optPi0) <-
         names(optGamma) <- names(optDelta) <- names(optSigma) <- names(bicVec) <- names(aicVec) <-
-            apply( cbind( object@peakChr, object@peakStart, object@peakEnd ), 1,
+            apply( cbind( get_peakChr(object), get_peakStart(object), get_peakEnd(object) ), 1,
                 function(x) paste( x, collapse="_" ) )
 
         # summary
@@ -247,10 +244,10 @@ setMethod(
         new( "DpeakFit",
             fits=fits, optFit=optFit, optMu=optMu, optPi=optPi, optPi0=optPi0,
             optGamma=optGamma, optDelta=optDelta, optSigma=optSigma,
-            bicVec=bicVec, aicVec=aicVec, fragSet=object@fragSet, PET=object@PET,
-            fragLenTable=object@fragLenTable, Fratio=object@Fratio,
-            aveFragLen=object@aveFragLen, stackedFragment=object@stackedFragment,
-            peakChr=object@peakChr, peakStart=object@peakStart, peakEnd=object@peakEnd,
+            bicVec=bicVec, aicVec=aicVec, fragSet=get_fragSet(object), PET=get_PET(object),
+            fragLenTable=get_fragLenTable(object), Fratio=get_Fratio(object),
+            aveFragLen=get_aveFragLen(object), stackedFragment=get_stackedFragment(object),
+            peakChr=get_peakChr(object), peakStart=get_peakStart(object), peakEnd=get_peakEnd(object),
             estDeltaSigma=estDeltaSigma, nTop=nTop, lbDelta=lbDelta, lbSigma=lbSigma,
             psize=psize, maxComp=maxComp, pConst=pConst,
             iterInit=iterInit, iterMain=iterMain, epsilon=epsilon )

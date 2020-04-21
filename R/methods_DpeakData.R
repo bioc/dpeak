@@ -69,7 +69,6 @@ setMethod(
 
         peakChr <- get_peakChr(object)
         chrList <- unique(peakChr)
-        #fragSet <- object@fragSet
         PET <- get_PET(object)
         aveFragLen <- get_aveFragLen(object)
 

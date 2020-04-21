@@ -32,7 +32,7 @@
         Fend <- pmin( fragSet[,1] + extension - 1, max(xvar) )
 
         xvarq <- c( min(Fstart), max(Fend) )
-        xvar_org <- c(seq_len(from = xvarq[1], to = xvarq[2]))
+        xvar_org <- c(seq(from = xvarq[1], to = xvarq[2]))
         yvar_org <- .ff_stack( Fstart, Fend, xvarq[1], xvarq[2] )
 
         yvarF <- rep( 0, length(xvar) )

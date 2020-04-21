@@ -5,9 +5,8 @@
 
     # extract estimates
 
-    PET <- object@PET
-    psize <- object@psize
-    #delta <- floor( psize / 2 )
+    PET <- get_PET(object)
+    psize <- get_psize(object)
 
     # error treatment
 
@@ -17,13 +16,13 @@
 
     # plot
 
-    for ( i in seq_len(length(object@stackedFragment)) ) {
+    for ( i in seq_len(length(get_stackedFragment(object))) ) {
 
-        plot_title <- paste(object@peakChr[i],": ",object@peakStart[i],"-",object@peakEnd[i],sep="")
+        plot_title <- paste(get_peakChr(object)[i],": ",get_peakStart(object)[i],"-",get_peakEnd(object)[i],sep="")
 
         # flag if there are no reads in the peak region
 
-        if ( is.na(object@fragSet[[i]][1,1]) ) {
+        if ( is.na(get_fragSet(object)[[i]][1,1]) ) {
 
             plot( 0, 0, type="n", xlab="", ylab="", axes=FALSE,
                 main=plot_title, xlim=c(-5,5), ylim=c(-5,5) )
@@ -35,15 +34,15 @@
         # plot
 
         xlim <- rep( NA, 2 )
-        xlim[1] <- min( object@peakStart[i], object@stackedFragment[[i]][,1] )
-        xlim[2] <- max( object@peakEnd[i], object@stackedFragment[[i]][,1] )
+        xlim[1] <- min( get_peakStart(object)[i], get_stackedFragment(object)[[i]][,1] )
+        xlim[2] <- max( get_peakEnd(object)[i], get_stackedFragment(object)[[i]][,1] )
 
-        Ni <- nrow(object@fragSet[[i]])
+        Ni <- nrow(get_fragSet(object)[[i]])
 
         if ( strand==TRUE ) {
 
-            .plotStrandData( stackedFragment=object@stackedFragment[[i]],
-                fragSet=object@fragSet[[i]], plot_title=plot_title, xlim=xlim,
+            .plotStrandData( stackedFragment=get_stackedFragment(object)[[i]],
+                fragSet=get_fragSet(object)[[i]], plot_title=plot_title, xlim=xlim,
                 PET=PET, extension=extension, smoothing=smoothing )
 
             if ( extension == 1 ) {
@@ -64,10 +63,10 @@
         } else {
             # combined
 
-            plot( object@stackedFragment[[i]][,1], object@stackedFragment[[i]][,2], type="l",
+            plot( get_stackedFragment(object)[[i]][,1], get_stackedFragment(object)[[i]][,2], type="l",
                 xlab="Genomic coordinates", ylab="Frequency",
                 main=plot_title,
-                xlim=xlim, ylim=c(0,max(object@stackedFragment[[i]][,2])*1.2) )
+                xlim=xlim, ylim=c(0,max(get_stackedFragment(object)[[i]][,2])*1.2) )
 
             legend( "topright", lty=c(1,2,2), lwd=c(1,2,2),
                 col=c("black","blue","lightblue"),
@@ -78,22 +77,9 @@
             )
         }
 
-        abline( v=object@optMu[[i]][ Ni * object@optPi[[i]] > threshold ], col="blue", lty=2, lwd=2 )
-        abline( v=object@optMu[[i]][ Ni * object@optPi[[i]] <= threshold ], col="lightblue", lty=2, lwd=2 )
-
-        #for ( j in 1:length(object@optMu[[i]]) ) {
-        #    if ( object@optPi[[i]][j] > threshold ) {
-        #        rect( object@optMu[[i]][j] - delta, -10,
-        #            object@optMu[[i]][j] + delta, max(object@stackedFragment[[i]][,2])+20,
-        #            density=10, col="blue", border="blue" )
-        #    } else {
-        #        rect( object@optMu[[i]][j] - delta, -10,
-        #            object@optMu[[i]][j] + delta, max(object@stackedFragment[[i]][,2])+20,
-        #            density=10, col="lightblue", border="lightblue" )
-        #    }
-        #}
-
-        abline( v=object@peakStart[i], col="red", lty=2 )
-        abline( v=object@peakEnd[i], col="red", lty=2 )
+        abline( v=get_optMu(object)[[i]][ Ni * get_optPi(object)[[i]] > threshold ], col="blue", lty=2, lwd=2 )
+        abline( v=get_optMu(object)[[i]][ Ni * get_optPi(object)[[i]] <= threshold ], col="lightblue", lty=2, lwd=2 )
+        abline( v=get_peakStart(object)[i], col="red", lty=2 )
+        abline( v=get_peakEnd(object)[i], col="red", lty=2 )
     }
 }

@@ -19,7 +19,6 @@
     R <- grid_max - grid_min + 1
 
     mu <- mu_init
-    #pi <- rep( 1/n_group, n_group )
     pi <- rep( 0.90/n_group, n_group )
     pi0 <- 0.10
     gamma <- 0.1
@@ -40,7 +39,7 @@
 
     for ( i in seq(from = 2, to = niter) ) {
         if ( verbose ) {
-            print( paste("------------ iteration:",i,"------------") )
+            message( paste("------------ iteration:",i,"------------") )
         }
 
         ########################################################################
@@ -48,8 +47,6 @@
         #                       E step: update Z                               #
         #                                                                      #
         ########################################################################
-
-        #print("E step")
 
         Z <- matrix( NA, N, n_group )
         if ( i < niter / 2 ) {
@@ -114,8 +111,6 @@
         #                      CM step: update mu                              #
         #                                                                      #
         ########################################################################
-
-        #print("M step")
 
         # group index
 
@@ -291,7 +286,6 @@
                     pi_mat <- pi_mat[ seq_len(i), , drop=FALSE ]
                     pi0_vec <- pi0_vec[ seq_len(i) ]
                     gamma_vec <- gamma_vec[ seq_len(i) ]
-                    #ll <- ll[ 1:i ]
 
                     break;
                 }
@@ -326,7 +320,6 @@
             pi_mat <- pi_mat[ seq_len(i), , drop=FALSE ]
             pi0_vec <- pi0_vec[ seq_len(i) ]
             gamma_vec <- gamma_vec[ seq_len(i) ]
-            #ll <- ll[ 1:i ]
             break;
 
         }
@@ -339,14 +332,14 @@
         gamma_vec[i] <- gamma
 
         if ( verbose ) {
-            print( "mu: " )
-            print( mu )
-            print( "pi: " )
-            print( pi )
-            print( "pi0: " )
-            print( pi0 )
-            print( "gamma: " )
-            print( gamma )
+            message( "mu: " )
+            message( mu )
+            message( "pi: " )
+            message( pi )
+            message( "pi0: " )
+            message( pi0 )
+            message( "gamma: " )
+            message( gamma )
         }
     }
 
