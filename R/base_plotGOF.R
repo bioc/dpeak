@@ -12,7 +12,7 @@
     PET <- get_PET(object)
     fragLenTable <- get_fragLenTable(object)
     aveFragLen <- get_aveFragLen(object)
-    Fratio <- get_Fratio(bject)
+    Fratio <- get_Fratio(object)
 
     # generate list to generate fragments
 

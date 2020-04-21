@@ -227,7 +227,7 @@ setMethod(
 
             .plotBIC( object=x )
         } else {
-            stop( "Inappropriate 'plotType'! Use either 'fit', 'GOF', or 'BIC'!" )
+            stop( "Inappropriate 'plotType'. Use either 'fit', 'GOF', or 'BIC'." )
         }
 
         dev.off()
