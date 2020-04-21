@@ -1,7 +1,7 @@
 # GOF plot
 
 .plotGOF <- function( object, nsimul=10000, seed=12345,
-    extension=1, smoothing=TRUE, nCore=8 ) {
+    extension=1, smoothing=TRUE, nCore=1 ) {
 
     # extract estimates
 
@@ -52,9 +52,6 @@
 
     message( "Info: Generating simulated fragments from the fitted model..." )
 
-    if ( is.element( "parallel", installed.packages()[,1] ) ) {
-        # if "parallel" package exists, utilize parallel computing with "parallel::mclapply"
-
         simList <- parallel::mclapply( optList, function(x) {
             simFrag <- .generateFragment( object=x,
                 PET=PET, Lvalue=Lvalue, Lprob=Lprob,
@@ -63,18 +60,6 @@
             out <- list( stackedFragment=simStack, fragSet=simFrag )
             return( out )
         }, mc.cores = nCore )
-    } else {
-        # otherwise, use usual "lapply"
-
-        simList <- lapply( optList, function(x) {
-            simFrag <- .generateFragment( object=x,
-                PET=PET, Lvalue=Lvalue, Lprob=Lprob,
-                Fratio=Fratio, aveFragLen=aveFragLen )
-            simStack <- .stackFragment( simFrag )
-            out <- list( stackedFragment=simStack, fragSet=simFrag )
-            return( out )
-        } )
-    }
 
     # GOF plot
 

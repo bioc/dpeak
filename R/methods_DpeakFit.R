@@ -216,7 +216,7 @@ setMethod(
     signature=c("DpeakFit","missing"),
     definition=function( x, y, filename=NULL, plotType="fit",
         strand=FALSE, extension=1, smoothing=FALSE,
-        threshold=1000, nsimul=10000, seed=12345, nCore=8, ... ) {
+        threshold=1000, nsimul=10000, seed=12345, nCore=1, ... ) {
 
         pdf( filename )
 
