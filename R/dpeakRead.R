@@ -151,7 +151,7 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     }
     gc()
 
-    message( "Info: Done!\n" )
+    message( "Info: Done.\n" )
 
     # remove temporary files after use
 

@@ -140,7 +140,7 @@ setMethod(
         # error treatment
 
         if ( extension < 1 ) {
-            stop( "Negative 'extension' is not allowed!" )
+            stop( "Negative 'extension' is not allowed." )
         }
 
         # plot

@@ -9,7 +9,7 @@ dpeakMotif <- function( peakfile=NULL, refGenome=NULL, flanking=100,
     # check refGenome
 
 	if ( is.null(refGenome) | !is( refGenome, "BSgenome" ) ) {
-		stop( "Please provide the appropriate reference genome BSgenome object!" )
+		stop( "Please provide the appropriate reference genome BSgenome object." )
 	}
 
 	# check whether meme exists

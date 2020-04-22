@@ -22,7 +22,7 @@ setMethod(
 		} else if ( init == "uniform" ) {
 			message( "Info: positions of binding events are initialized uniformly over the candidate region." )
 		} else {
-			stop( "Inappropriate 'init' argument! It should be either 'localmax' or 'uniform'." )
+			stop( "Inappropriate 'init' argument. It should be either 'localmax' or 'uniform'." )
 		}
 
         # safe guard: iterInit, iterMain
@@ -44,7 +44,7 @@ setMethod(
             } else if ( estDeltaSigma == "common" ) {
                 message( "Info: estimate common peak shape using top candidate regions." )
             } else {
-                stop( "Inappropriate 'estDeltaSigma' argument!" )
+                stop( "Inappropriate 'estDeltaSigma' argument." )
             }
         }
 

@@ -151,5 +151,5 @@
         }
     }
 
-    message( "Info: Done!" )
+    message( "Info: Done." )
 }
