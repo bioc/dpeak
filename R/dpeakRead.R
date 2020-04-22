@@ -41,7 +41,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
     message( "Info: Reading peak list..." )
     peakSet <- read.table( peakfile, header=FALSE, stringsAsFactors=FALSE )
     nPeak <- nrow(peakSet)
-    gc()
 
     # match chromosomes between peak list and reads
 
@@ -118,9 +117,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         emptyList <- ""
     }
 
-    rm( out )
-    gc()
-
     # check proportion of forward reads for SET data
 
     if ( PET == TRUE ) {
@@ -149,7 +145,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
         fragLenTable <- table( fragLen )
         aveFragLen <- fragLen
     }
-    gc()
 
     message( "Info: Done.\n" )
 
@@ -217,7 +212,6 @@ dpeakRead <- function( peakfile=NULL, readfile=NULL,
             check.names=FALSE )
         colnames(readCur) <- c("chrID","start","end","str")
     }
-    gc()
 
     # match reads for each peak region
 

@@ -6,6 +6,12 @@ dpeakMotif <- function( peakfile=NULL, refGenome=NULL, flanking=100,
 	fimoArgument="-max-stored-scores 100000000 -motif-pseudo 0.000001",
     tempDir=NULL )
 {
+	# check if system is windows
+	if( identical(.Platform$OS.type,"windows") )
+	{
+		stop( "Stopping. DpeakMotif is not supported on Windows at this time.")
+	}
+
     # check refGenome
 
 	if ( is.null(refGenome) | !is( refGenome, "BSgenome" ) ) {
@@ -16,7 +22,6 @@ dpeakMotif <- function( peakfile=NULL, refGenome=NULL, flanking=100,
     message( "Info: Reading peak list..." )
     peakSet <- read.table( peakfile, header=FALSE, stringsAsFactors=FALSE, sep="\t" )
     nPeak <- nrow(peakSet)
-    gc()
 
 	# set up temporary files
 
@@ -71,7 +76,6 @@ dpeakMotif <- function( peakfile=NULL, refGenome=NULL, flanking=100,
 	seqSet <- getSeq( x = refGenome,
 		names = peakSet[,1], start = peakStart, end = peakEnd,
 		strand = "+" )
-	gc()
 
 	if ( nrow(peakSet) > 1 ) {
 		for ( i in seq_len(length(seqSet)) ) {
@@ -97,8 +101,6 @@ dpeakMotif <- function( peakfile=NULL, refGenome=NULL, flanking=100,
 		message( as.character(seqSet),"\n", sep="", file=tempFASTA, append=TRUE )
 	}
 
-	rm(seqSet)
-	gc()
 
 	# run MEME to identify de novo motifs
 

@@ -156,9 +156,6 @@ setMethod(
 			deltaCommon <- deltaCommon / ntotal
 			sigmaCommon <- sigmaCommon / ntotal
 
-			rm( dataObj )
-			gc()
-
         } else if ( estDeltaSigma == "separate" ) {
 
 			deltaCommon <- NA
@@ -205,10 +202,6 @@ setMethod(
                     stop_eps=epsilon, verbose=verbose )
                 } )
         }
-
-        rm( dataObj )
-        gc()
-
         # select optimal model
 
         fits <- vector( "list", length(get_fragSet(object)) )
@@ -231,8 +224,6 @@ setMethod(
             bicVec[[i]] <- fit_all[[i]]$bicVec
             aicVec[[i]] <- fit_all[[i]]$aicVec
         }
-        rm( fit_all )
-        gc()
 
         names(fits) <- names(optFit) <- names(optMu) <- names(optPi) <- names(optPi0) <-
         names(optGamma) <- names(optDelta) <- names(optSigma) <- names(bicVec) <- names(aicVec) <-
