@@ -1,7 +1,7 @@
 Package: dpeak
 Type: Package
 Title: dPeak (Deconvolution of Peaks in ChIP-seq Analysis)
-Version: 0.99.42
+Version: 0.99.43
 Depends: R (>= 4.0.0), methods, stats, utils, graphics, Rcpp
 Imports: MASS, IRanges, BSgenome, grDevices, parallel
 Suggests: BSgenome.Ecoli.NCBI.20080805
@@ -15,5 +15,5 @@ License: GPL (>= 2)
 LazyData: FALSE
 NeedsCompilation: yes
 biocViews: ChIPSeq, Genetics, Sequencing, Software, Transcription
-SystemRequirements: GNU make
+SystemRequirements: GNU make, meme, fimo
 BugReports: https://github.com/dongjunchung/dpeak/issues

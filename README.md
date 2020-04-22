@@ -9,7 +9,7 @@ library(devtools)
 install_github("dongjunchung/dpeak")
 ```
 
-Note that GNU Make is a system requirement. For more information on installing GNU Make can be found here: https://www.gnu.org/software/make/. 
+Note that GNU Make is a system requirement. For more information on installing GNU Make can be found here: https://www.gnu.org/software/make/. Note as well that fimo and meme are required for use of DpeakMotif. Since these are unavailable on Windows, Windows users will not be able to utilize the DpeakMotif functionality.
 
 References
 ==========
